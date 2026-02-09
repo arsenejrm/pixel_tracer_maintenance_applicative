@@ -1,0 +1,5 @@
+Comment utiliser les fichiers .xmi ?
+
+Les fichiers .xmi sont des fichiers de diagrammes générés et utilisés par le logiciel de diagramme UML Umbrello.
+Vous devez donc ouvrir ce fichier avec Umbrello pour visualier le diagramme que nous avons édité.
+Nous incluons une image du diagramme à jour avec le fichier, dans le cas où vous n'avez pas la possibilité d'utiliser Umbrello.
