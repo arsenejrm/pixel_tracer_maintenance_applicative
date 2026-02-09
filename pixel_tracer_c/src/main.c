@@ -6,7 +6,13 @@
 
 
 
-
+/**
+ * FR : Point d'entrée principal de l'application Pixel Tracer.
+ *      Initialise l'application, gère la boucle principale et le rendu.
+ *
+ * EN : Main entry point of the Pixel Tracer application.
+ *      Initializes the application, handles the main loop and rendering.
+ */
 int main() {
     Pixel_tracer_app app;
     init_app(&app);

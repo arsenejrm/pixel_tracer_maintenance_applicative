@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/cmake-build-debug"
+			"value" : "c:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer"
+			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/furie/AppData/Local/Programs/CLIONN~1/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/Users/furie/AppData/Local/Programs/CLion Nova/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1147,7 +1147,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/cmake-build-debug"
+			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c/cmake-build-debug"
 		},
 		{
 			"name" : "pixel_tracer_IS_TOP_LEVEL",
@@ -1171,7 +1171,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer"
+			"value" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c"
 		}
 	],
 	"kind" : "cache",

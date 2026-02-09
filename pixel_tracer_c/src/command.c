@@ -1,6 +1,14 @@
 #include "command.h"
 
+/*
+ * FR : Code d'erreur courant après l'exécution d'une commande.
+ * EN : Current error code after command execution.
+ */
 static unsigned int error_num = 0;
+/*
+ * FR : Messages associés aux codes d'erreur.
+ * EN : Messages associated with error codes.
+ */
 static char *error_messages[] = {
     "",
     "commande inconnue",
@@ -14,7 +22,10 @@ static char *error_messages[] = {
     "id inconnu dans la list"
         /* liste à compléter */
 };
-
+/**
+ * FR : Crée et initialise une nouvelle commande.
+ * EN : Creates and initializes a new command.
+ */
 Command *create_commande() {
     Command *cmd = (Command *) malloc(sizeof(Command));
     cmd->name[0] = '\0';
@@ -23,21 +34,30 @@ Command *create_commande() {
     cmd->flt_size = 0;
     return cmd;
 }
-
+/**
+ * FR : Ajoute un paramètre entier à la commande.
+ * EN : Adds an integer parameter to the command.
+ */
 void add_int_param(Command * cmd, int p) {
     if (cmd->int_size >= MAX_PARAM - 1)
         return;
     cmd->int_params[cmd->int_size] = p;
     cmd->int_size = cmd->int_size + 1;
 }
-
+/**
+ * FR : Ajoute un paramètre flottant à la commande.
+ * EN : Adds a float parameter to the command.
+ */
 void add_float_param(Command * cmd, float p) {
     if (cmd->flt_size >= MAX_PARAM - 1)
         return;
     cmd->flt_params[cmd->flt_size] = p;
     cmd->flt_size = cmd->flt_size + 1;
 }
-
+/**
+ * FR : Ajoute un paramètre chaîne (copie dynamique).
+ * EN : Adds a string parameter (dynamic copy).
+ */
 void add_str_param(Command * cmd, char *p) {
     if (cmd->str_size >= MAX_PARAM - 1)
         return;
@@ -46,14 +66,20 @@ void add_str_param(Command * cmd, char *p) {
     cmd->str_params[cmd->str_size] = cpy_str;
     cmd->str_size = cmd->str_size + 1;
 }
-
+/**
+ * FR : Libère les ressources associées à une commande.
+ * EN : Frees resources associated with a command.
+ */
 void free_cmd(Command * cmd) {
     int i;
     for (i = 0; i < cmd->str_size; i++) {
         free(cmd->str_params[i]);
     }
 }
-
+/**
+ * FR : Convertit une chaîne en minuscules.
+ * EN : Converts a string to lowercase.
+ */
 void strlwr2(char *str) {
     int i;
     for (i = 0; i < strlen(str); i++) {
@@ -62,7 +88,10 @@ void strlwr2(char *str) {
         }
     }
 }
-
+/**
+ * FR : Vérifie si une chaîne représente un entier.
+ * EN : Checks if a string represents an integer.
+ */
 int is_int(const char *str) {
     int i;
     for (i = 0; i < strlen(str); i++) {
@@ -72,7 +101,10 @@ int is_int(const char *str) {
     }
     return 1;
 }
-
+/**
+ * FR : Vérifie si une chaîne est un mot (a-z).
+ * EN : Checks if a string is a word (a-z).
+ */
 int is_word(const char *str) {
     int i;
     for (i = 0; i < strlen(str); i++) {
@@ -83,11 +115,19 @@ int is_word(const char *str) {
     return 1;
 }
 
-
+/**
+ * FR : Vérifie si une chaîne représente un flottant.
+ * EN : Checks if a string represents a float.
+ * TODO : implémentation incomplète??
+ */
 int is_float(const char *str) {
     return 0;                   /* TODO  */
 }
 
+/**
+ * FR : Nettoie une ligne de texte (commentaires, caractères invalides).
+ * EN : Cleans input text (comments, invalid characters).
+ */
 void clean_text(char *str) {
     int i = 0;
     strlwr2(str);

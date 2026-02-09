@@ -5,31 +5,62 @@
 #include "id.h"
 #include "shape.h"
 
-
+/*
+ * FR :
+ * Crée un point avec des coordonnées (x, y).
+ *
+ * ENG :
+ * Creates a point with coordinates (x, y).
+ */
 Point *create_point(int px, int py) {
     Point *p = (Point *) malloc(sizeof(Point));
     p->pos_x = px;
     p->pos_y = py;
     return p;
 }
-
+/*
+ * FR :
+ * Supprime un point et libère sa mémoire.
+ *
+ * ENG :
+ * Deletes a point and frees its memory.
+ */
 void delete_point(Point * point) {
     free(point);
 }
 
+/*
+ * FR :
+ * Crée une ligne à partir de deux points.
+ *
+ * ENG :
+ * Creates a line from two points.
+ */
 Line *create_line(Point * p1, Point * p2) {
     Line *l = (Line *) malloc(sizeof(Line));
     l->p1 = p1;
     l->p2 = p2;
     return l;
 }
-
+/*
+ * FR :
+ * Supprime une ligne et ses points associés.
+ *
+ * ENG :
+ * Deletes a line and its associated points.
+ */
 void delete_line(Line * line) {
     delete_point(line->p1);
     delete_point(line->p2);
     free(line);
 }
-
+/*
+ * FR :
+ * Crée un carré à partir d’un point d’origine et d’une longueur.
+ *
+ * ENG :
+ * Creates a square from an origin point and a length.
+ */
 Squar *create_squar(Point * point, int length) {
     Squar *squar = (Squar *) malloc(sizeof(Squar));
     squar->p1 = point;
@@ -37,11 +68,25 @@ Squar *create_squar(Point * point, int length) {
     return squar;
 }
 
+/*
+ * FR :
+ * Supprime un carré et son point d’origine.
+ *
+ * ENG :
+ * Deletes a square and its origin point.
+ */
 void delete_squar(Squar * squar) {
     delete_point(squar->p1);
     free(squar);
 }
 
+/*
+ * FR :
+ * Crée un rectangle à partir d’un point, d’une largeur et d’une hauteur.
+ *
+ * ENG :
+ * Creates a rectangle from a point, a width and a height.
+ */
 Rectangle *create_rectangle(Point * point, int width, int height) {
     Rectangle *rec = (Rectangle *) malloc(sizeof(Rectangle));
     rec->p1 = point;
@@ -50,11 +95,25 @@ Rectangle *create_rectangle(Point * point, int width, int height) {
     return rec;
 }
 
+/*
+ * FR :
+ * Supprime un rectangle et son point d’origine.
+ *
+ * ENG :
+ * Deletes a rectangle and its origin point.
+ */
 void delete_rectangle(Rectangle * rectangle) {
     delete_point(rectangle->p1);
     free(rectangle);
 }
 
+/*
+ * FR :
+ * Crée un cercle à partir d’un centre et d’un rayon.
+ *
+ * ENG :
+ * Creates a circle from a center point and a radius.
+ */
 Cercle *create_cercle(Point * center, int radus) {
     Cercle *cercle = (Cercle *) malloc(sizeof(Cercle));
     cercle->center = center;
@@ -62,11 +121,25 @@ Cercle *create_cercle(Point * center, int radus) {
     return cercle;
 }
 
+/*
+ * FR :
+ * Supprime un cercle et son centre.
+ *
+ * ENG :
+ * Deletes a circle and its center point.
+ */
 void delete_cercle(Cercle * cercle) {
     delete_point(cercle->center);
     free(cercle);
 }
 
+/*
+ * FR :
+ * Crée un polygone avec un nombre donné de sommets.
+ *
+ * ENG :
+ * Creates a polygon with a given number of vertices.
+ */
 Polygon *create_polygon(int n) {
     Polygon *poly = (Polygon *) malloc(sizeof(Polygon));
     poly->points = (Point **) malloc(sizeof(Point *) * n);
@@ -76,7 +149,13 @@ Polygon *create_polygon(int n) {
     }
     return poly;
 }
-
+/*
+ * FR :
+ * Supprime un polygone et tous ses points.
+ *
+ * ENG :
+ * Deletes a polygon and all its points.
+ */
 void delete_polygon(Polygon * polygon) {
     for (int i = 0; i < polygon->n; i++) {
         delete_point(polygon->points[i]);
@@ -85,7 +164,13 @@ void delete_polygon(Polygon * polygon) {
     free(polygon);
 }
 
-
+/*
+ * FR :
+ * Crée une courbe à partir de quatre points de contrôle.
+ *
+ * ENG :
+ * Creates a curve from four control points.
+ */
 Curve *create_curve(Point * p1, Point * p2, Point * p3, Point * p4) {
     Curve *cur = (Curve *) malloc(sizeof(Curve));
     cur->p1 = p1;
@@ -95,6 +180,13 @@ Curve *create_curve(Point * p1, Point * p2, Point * p3, Point * p4) {
     return cur;
 }
 
+/*
+ * FR :
+ * Supprime une courbe et ses points de contrôle.
+ *
+ * ENG :
+ * Deletes a curve and its control points.
+ */
 void delete_curve(Curve * curve) {
     delete_point(curve->p1);
     delete_point(curve->p2);

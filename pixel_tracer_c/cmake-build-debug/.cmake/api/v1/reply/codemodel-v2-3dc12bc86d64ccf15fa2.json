@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/cmake-build-debug",
-		"source" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer"
+		"build" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c/cmake-build-debug",
+		"source" : "C:/Users/furie/Desktop/Cours/Maintenance/pixel_tracer/pixel_tracer/pixel_tracer_maintenance_applicative/pixel_tracer_c"
 	},
 	"version" : 
 	{

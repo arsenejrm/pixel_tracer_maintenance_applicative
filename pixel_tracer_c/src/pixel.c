@@ -1,5 +1,14 @@
 #include "pixel.h"
 
+/*
+ * FR :
+ * Crée un pixel avec une position (x, y) et une couleur.
+ * La mémoire est allouée dynamiquement.
+ *
+ * ENG :
+ * Creates a pixel with a position (x, y) and a color.
+ * Memory is dynamically allocated.
+ */
 Pixel *create_pixel(int px, int py, int color) {
     Pixel *pixel = (Pixel *) malloc(sizeof(Pixel));
     pixel->px = px;
@@ -8,11 +17,27 @@ Pixel *create_pixel(int px, int py, int color) {
     return pixel;
 }
 
+/*
+ * FR :
+ * Libère la mémoire associée à un pixel.
+ *
+ * ENG :
+ * Frees the memory associated with a pixel.
+ */
 void delete_pixel(Pixel * pixel) {
     free(pixel);
 }
 
 
+/*
+ * FR :
+ * Génère la liste de pixels correspondant à une forme donnée.
+ * La forme est convertie en pixels selon son type géométrique.
+ *
+ * ENG :
+ * Generates a list of pixels corresponding to a given shape.
+ * The shape is converted into pixels according to its geometry type.
+ */
 list *create_shape_to_pixel(Shape * shape) {
     if (shape->ptrShape == NULL) {
         return NULL;
@@ -47,17 +72,39 @@ list *create_shape_to_pixel(Shape * shape) {
     return lst;
 }
 
+/*
+ * FR :
+ * Supprime les pixels associés à une forme.
+ * (Fonction non implémentée pour le moment.)
+ *
+ * ENG :
+ * Removes the pixels associated with a shape.
+ * (Function not implemented yet.)
+ */
 void remove_pixel_shape(list * pixel_lst) {
 
 }
 
-
+/*
+ * FR :
+ * Génère un pixel à partir d’un point.
+ *
+ * ENG :
+ * Generates a pixel from a point.
+ */
 void pixel_point(Shape * shape, list * lst) {
     Point *pt = (Point *) shape->ptrShape;
     Pixel *px = create_pixel(pt->pos_x, pt->pos_y, shape->color);
     lst_insert_tail(lst, lst_create_lnode(px));
 }
 
+/*
+ * FR :
+ * Dessine un segment entre deux points
+ *
+ * ENG :
+ * Draws a segment between two points
+ */
 void draw_segment(int x, int y, int dx, int dy, Color color, list * lst) {
     int i, cumul;
     int xinc, yinc;
@@ -98,6 +145,13 @@ void draw_segment(int x, int y, int dx, int dy, Color color, list * lst) {
     }
 }
 
+/*
+ * FR :
+ * Génère les pixels correspondant à une ligne.
+ *
+ * ENG :
+ * Generates the pixels corresponding to a line.
+ */
 void pixel_line(Shape * shape, list * lst) {
     Line *p_line = (Line *) shape->ptrShape;
     int dx, dy, x, y;
@@ -109,6 +163,13 @@ void pixel_line(Shape * shape, list * lst) {
     draw_segment(x, y, dx, dy, shape->color, lst);
 }
 
+/*
+ * FR :
+ * Génère les pixels d’un cercle
+ *
+ * ENG :
+ * Generates the pixels of a circle
+ */
 void pixel_cercle(Shape * shashapepe, list * lst) {
     Cercle *p_cercle = (Cercle *) shape->ptrShape;
     int x = 0;
@@ -158,7 +219,13 @@ void pixel_cercle(Shape * shashapepe, list * lst) {
         }
     }
 }
-
+/*
+ * FR :
+ * Génère les pixels d’un rectangle
+ *
+ * ENG :
+ * Generates the pixels of a rectangle
+ */
 void pixel_rectangle(Shape * shape, list * lst) {
     Rectangle *p_rec = (Rectangle *) shape->ptrShape;
     draw_segment(p_rec->p1->pos_x, p_rec->p1->pos_y, 0, p_rec->width - 1,
@@ -171,7 +238,13 @@ void pixel_rectangle(Shape * shape, list * lst) {
                  p_rec->width - 1, shape->color, lst);
 
 }
-
+/*
+ * FR :
+ * Génère les pixels d’un carré
+ *
+ * ENG :
+ * Generates the pixels of a square
+ */
 void pixel_square(Shape * shape, list * lst) {
     Squar *p_sqaure = (Squar *) shape->ptrShape;
     draw_segment(p_sqaure->p1->pos_x, p_sqaure->p1->pos_y,
@@ -185,7 +258,13 @@ void pixel_square(Shape * shape, list * lst) {
                  p_sqaure->p1->pos_y, 0, p_sqaure->length - 1,
                  shape->color, lst);
 }
-
+/*
+ * FR :
+ * Génère les pixels d’un polygone
+ *
+ * ENG :
+ * Generates the pixels of a polygon
+ */
 void pixel_polygon(Shape * shape, list * lst) {
 
     Polygon *poly = (Polygon *) shape->ptrShape;
@@ -224,7 +303,13 @@ Point cj_calc(Point ** points, int num_pt, double t) {
     return tmp_pt[0];
 }
 
-
+/*
+ * FR :
+ * Génère les pixels d’une courbe
+ *
+ * ENG :
+ * Generates the pixels of a curve
+ */
 void pixel_curve(Shape * shape, list * lst) {
     Curve *p_curve = (Curve *) shape->ptrShape;
     Point *points[] =
