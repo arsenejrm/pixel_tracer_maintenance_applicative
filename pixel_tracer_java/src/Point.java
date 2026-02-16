@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class Point
  */
-public class Point extends Shape, Shape {
+public class Point extends Shape {
 
     //
     // Fields
@@ -66,6 +66,7 @@ public class Point extends Shape, Shape {
 
     /**
      */
+    @Override
     public void toString()
     {
         String str = "(" + this.pos_x + this.pos_y + ")"
