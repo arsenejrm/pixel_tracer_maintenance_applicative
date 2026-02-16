@@ -1,72 +1,65 @@
 
 
 /**
- * Class Pixel
+ * La classe Pixel est l'unité d'affichage utilisée pour afficher le projet dans la console.
  */
 public class Pixel {
 
-    //
-    // Fields
-    //
-
+    // Coordonnées
     private int x;
     private int y;
     
-    //
-    // Constructors
-    //
-    public Pixel () { };
-    
-    //
-    // Methods
-    //
+    /**
+     * Constructeur de la classe Pixel, avec comme paramètres les coordonnées du pixel
+     * @param par_x La valeur de x sur laquelle le pixel se placera en longueur
+     * @param par_y La valeur de y sur laquelle le pixel se placera en hauteur
+     */
+    public Pixel(int par_x, int par_y) {
+        this.x = par_x;
+        this.y = par_y;
+    };
 
 
-    //
-    // Accessor methods
-    //
 
     /**
-     * Set the value of x
-     * @param newVar the new value of x
+     * Détermine la valeur de la coordonnée x
+     * @param par_x La valeur de x sur laquelle le pixel se placera en longueur
      */
-    public void setX (int newVar) {
-        x = newVar;
+    public void setX (int par_x) {
+        x = par_x;
     }
 
     /**
-     * Get the value of x
-     * @return the value of x
+     * Renvoie la valeur de la coordonnée x
+     * @return La valeur de la coordonnée x
      */
     public int getX () {
         return x;
     }
 
     /**
-     * Set the value of y
-     * @param newVar the new value of y
+     * Détermine la valeur de la coordonnée y
+     * @param par_y La valeur de y sur laquelle le pixel se placera en hauteur
      */
-    public void setY (int newVar) {
-        y = newVar;
+    public void setY (int par_y) {
+        y = par_y;
     }
 
     /**
-     * Get the value of y
-     * @return the value of y
+     * Renvoie la valeur de la coordonnée y
+     * @return La valeur de la coordonnée y
      */
     public int getY () {
         return y;
     }
 
-    //
-    // Other methods
-    //
+
 
     /**
+     * Renvoie les coordonnées du pixel sous la forme (x, y)
      */
-    public void toString()
+    public String toString()
     {
+        return "(" + this.x + ", " + this.y + ")";
     }
-
-
 }
