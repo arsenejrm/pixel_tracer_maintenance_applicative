@@ -12,7 +12,8 @@ public class Polygon extends Shape {
     //
 
     private int n;
-    
+    private List<Point> points;
+
     //
     // Constructors
     //
@@ -20,30 +21,36 @@ public class Polygon extends Shape {
         super(0);
      };
     
+    public Polygon(int n, List<Point> points) {
+        super(0);
+        this.n = n;
+        this.points = points;
+    }
+
+    public Polygon(int id, int n, List<Point> points) {
+        super(id);
+        this.n = n;
+        this.points = points;
+    }
+    
     //
     // Methods
     //
+    public void draw(char[][] canvas) {
+        for (int i = 0; i < n; i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get((i+1)%n);
+            Line line = new Line(p1, p2);
+            line.draw(canvas);
+        }
+    }
 
-     @Override
-     public void draw(char[][] canvas) {
-         // Draw the rectangle on the canvas
-         if (p1 == null) return;
-         
-         int x = p1.getPos_x();
-         int y = p1.getPos_y();
-         
-         for (int i = y; i < y + height && i < canvas.length; i++) {
-             for (int j = x; j < x + width && j < canvas[i].length; j++) {
-                 canvas[i][j] = '*';
-             }
-         }
-     }
-    public void translate(int deltaX, int deltaY) {
-         if (p1 != null) {
-             p1.setPos_x(p1.getPos_x() + deltaX);
-             p1.setPos_y(p1.getPos_y() + deltaY);
-         }
-     }
+    public void translate(int x, int y) {
+        for (Point p : points) {
+            p.setPos_x(p.getPos_x() + x);
+            p.setPos_y(p.getPos_y() + y);
+        }
+    }
 
      public void rotate(double angle) {
         // TODO implement here

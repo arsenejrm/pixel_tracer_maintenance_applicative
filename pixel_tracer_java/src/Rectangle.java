@@ -21,7 +21,21 @@ public class Rectangle extends Shape {
     public Rectangle () {
         super(0);
      };
-    
+
+    public Rectangle (int height, int width, Point p1) {
+        super(0);
+        this.height = height;
+        this.width = width;
+        this.p1 = p1;
+     };
+     
+    public Rectangle(int id, int height, int width, Point p1) {
+        super(id);
+        this.height = height;
+        this.width = width;
+        this.p1 = p1;
+     }
+     
     //
     // Methods
     //

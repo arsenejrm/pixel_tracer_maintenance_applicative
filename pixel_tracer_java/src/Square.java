@@ -20,7 +20,19 @@ public class Square extends Shape {
     public Square () {
         super(0);
      };
+
+    public Square (int lenght, Point p1) {
+        super(0);
+        this.lenght = lenght;
+        this.p1 = p1;
+     };
     
+    public Square(int id, int lenght, Point p1) {
+        super(id);
+        this.lenght = lenght;
+        this.p1 = p1;
+     }
+     
     //
     // Methods
     //

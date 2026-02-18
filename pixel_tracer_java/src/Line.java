@@ -21,6 +21,18 @@ public class Line extends Shape {
         super(0);
      };
     
+    public Line(Point p1, Point p2) {
+        super(0);
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+    
+     public Line(int id, Point p1, Point p2) {
+        super(id);
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+
     //
     // Methods
     //
