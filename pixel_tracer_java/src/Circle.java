@@ -20,18 +20,36 @@ public class Circle extends Shape {
     public Circle () {
         super(0);
      };
-    
+    public Circle(int radius, Point center) {
+        super(0);
+        this.radius = radius;
+        this.center = center;
+     };
+
+    public Circle(int id, int radius, Point center) {
+        super(id);
+        this.radius = radius;
+        this.center = center;
+     }
+     
     //
     // Methods
     //
 
-        public void draw(char[][] canvas) {
-            // TODO implement here
+    public void draw(char[][] canvas) {
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[i].length; j++) {
+                if (Math.pow(i - center.getPos_y(), 2) + Math.pow(j - center.getPos_x(), 2) <= Math.pow(radius, 2)) {
+                    canvas[i][j] = '*';
+                }
+            }
         }
+    }
 
     public void translate(int x, int y) {
-        // TODO implement here    
-    }   
+        center.setPos_x(center.getPos_x() + x);
+        center.setPos_y(center.getPos_y() + y);
+    }
 
     public void rotate(double angle) {
         // TODO implement here

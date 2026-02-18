@@ -22,7 +22,22 @@ public class Curve extends Shape {
     public Curve () {
         super(0);
      };
-    
+    public Curve (Point p1, Point p2, Point p3, Point p4) {
+        super(0);
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
+        this.p4 = p4;
+     };
+
+    public Curve(int id, Point p1, Point p2, Point p3, Point p4) {
+        super(id);
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
+        this.p4 = p4;
+     }
+     
     //
     // Methods
     //
