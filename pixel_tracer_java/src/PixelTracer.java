@@ -13,12 +13,22 @@ public class PixelTracer {
     private Area current_area;
     private Layer current_layer;
     private Shape current_shape;
+    private ArrayList<ArrayList<Character>> pixel_map;
     
     //
     // Constructors
     //
-    public PixelTracer () {
-     };
+    public PixelTracer (int width, int height) {
+        this.pixel_map = new ArrayList<>();
+        Character pixel = '.';
+        for (int i = 0; i < height; i++) {
+            ArrayList<Character> pixel_line = new ArrayList<>();
+            for (int j = 0; j < width; j++) {
+                pixel_line.add(pixel);
+            }
+            this.pixel_map.add(pixel_line);
+        }
+    };
     
     //
     // Methods
@@ -183,7 +193,16 @@ public class PixelTracer {
             }
                         
             case "plot" -> {
-                return "[WIP] Bam t'as l'affichage (c'est faux)";
+                String string_map = "";
+
+                for (int i = 0; i < pixel_map.size(); i++) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int j = 0; j < pixel_map.get(i).size(); j++) {
+                        sb.append(pixel_map.get(i).get(j));
+                    }
+                    string_map += sb + "\n";
+                }
+                return string_map;
             }
 
             case "clear" -> {

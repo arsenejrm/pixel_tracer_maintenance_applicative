@@ -4,15 +4,11 @@ import java.util.Scanner;
  * Class App
  */
 public class App {
-    @SuppressWarnings("UseSpecificCatch")
+    @SuppressWarnings({"UseSpecificCatch", "ConvertToTryWithResources"})
     public static void main(String[] args) {
         Boolean run = true;
-        try {
-            Scanner scanner = new Scanner(System.in);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        PixelTracer pt = new PixelTracer();
+        Scanner scanner = new Scanner(System.in);
+        PixelTracer pt = new PixelTracer(80, 40);
         String response;
 
         while (run) {
@@ -22,7 +18,6 @@ public class App {
             if (response.equals("exit")) {
                 break;
             }
-            System.out.println(response);
             if (response.equals("clear")) {
                 try {
                     if (System.getProperty("os.name").contains("Windows")) {
@@ -35,6 +30,8 @@ public class App {
                         System.out.flush();
                     }
                 } catch (Exception e) {}
+            } else {
+                System.out.println(response);
             }
         }
         scanner.close();
