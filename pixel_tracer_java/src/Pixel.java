@@ -8,11 +8,7 @@ public class Pixel {
     // Coordonnées
     private int x;
     private int y;
-
-    public Pixel() {
-        this(0, 0);
-    }
-
+    
     /**
      * Constructeur de la classe Pixel, avec comme paramètres les coordonnées du pixel
      * @param par_x La valeur de x sur laquelle le pixel se placera en longueur
@@ -22,8 +18,6 @@ public class Pixel {
         this.x = par_x;
         this.y = par_y;
     };
-
-
 
 
 
@@ -59,18 +53,6 @@ public class Pixel {
         return y;
     }
 
-    // Déplacement
-    public void translate(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
-    }
-
-    // Distance entre deux points
-    public double distance(Pixel other) {
-        int dx = other.x - this.x;
-        int dy = other.y - this.y;
-        return Math.sqrt(dx * dx + dy * dy);
-    }
 
 
     /**
