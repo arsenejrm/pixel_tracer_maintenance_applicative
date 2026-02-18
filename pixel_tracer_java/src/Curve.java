@@ -19,7 +19,9 @@ public class Curve extends Shape {
     //
     // Constructors
     //
-    public Curve () { };
+    public Curve () {
+        super(0);
+     };
     
     //
     // Methods
@@ -32,7 +34,7 @@ public class Curve extends Shape {
         // TODO implement here
     }
     
-    public void rotate(int angle) {
+    public void rotate(double angle) {
         // TODO implement here
     }
     

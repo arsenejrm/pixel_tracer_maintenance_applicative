@@ -28,7 +28,7 @@ public class DrawShape {
         // TODO implement here
     }
 
-    public void rotate(int angle) {
+    public void rotate(double angle) {
         // TODO implement here
     }
 
