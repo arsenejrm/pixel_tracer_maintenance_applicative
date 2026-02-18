@@ -134,9 +134,9 @@ public class PixelTracer {
     }
 
     public String command_interpreter(String user_input) {
-        String error_empty = "commandde manquante";
+        String error_empty = "commande manquante";
         String error_param = "erreur paramètres, consulter la commande help";
-        
+
         String[] splitted_input = user_input.split(" ");
         if (splitted_input.length == 0) {
             return error_empty;
@@ -187,11 +187,11 @@ public class PixelTracer {
             }
 
             case "clear" -> {
-                return "[WIP] Bam tout l'affichage dégage (c'est faux)";
+                return "clear";
             }
 
             case "exit" -> {
-                return "[WIP] Bam fin de programme (c'est faux)";
+                return "exit";
             }
 
             default -> {
