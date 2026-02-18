@@ -49,6 +49,11 @@ public class Rectangle extends Shape {
 
     public void rotate(double angle) {
         // Rotation logic
+    }   
+
+     public void scale(double factor) {
+        height = (int)(height * factor);
+        width = (int)(width * factor);
     }
 
     public void resize(double factor) {

@@ -25,14 +25,28 @@ public class Square extends Shape {
     // Methods
     //
     public void draw(char[][] canvas) {
-        // TODO implement here
+        if (p1 == null || lenght <= 0 || canvas == null) {
+            return;
+        }
+        
+        int x = p1.getPos_x();
+        int y = p1.getPos_y();
+        
+        for (int i = 0; i < lenght && y + i < canvas.length; i++) {
+            for (int j = 0; j < lenght && x + j < canvas[0].length; j++) {
+                canvas[y + i][x + j] = '#';
+            }
+        }
     }
+    public void translate(int deltaX, int deltaY) {
+         if (p1 != null) {
+             p1.setPos_x(p1.getPos_x() + deltaX);
+             p1.setPos_y(p1.getPos_y() + deltaY);
+         }
+     }
 
-    public void translate(int x, int y) {
-        // TODO implement here
-    }
 
-     public void rotate(double angle) {
+    public void rotate(double angle) {
         // TODO implement here
     }
 

@@ -24,13 +24,26 @@ public class Polygon extends Shape {
     // Methods
     //
 
+     @Override
      public void draw(char[][] canvas) {
-        // TODO implement here
-    }
-
-    public void translate(int x, int y) {
-        // TODO implement here
-    }
+         // Draw the rectangle on the canvas
+         if (p1 == null) return;
+         
+         int x = p1.getPos_x();
+         int y = p1.getPos_y();
+         
+         for (int i = y; i < y + height && i < canvas.length; i++) {
+             for (int j = x; j < x + width && j < canvas[i].length; j++) {
+                 canvas[i][j] = '*';
+             }
+         }
+     }
+    public void translate(int deltaX, int deltaY) {
+         if (p1 != null) {
+             p1.setPos_x(p1.getPos_x() + deltaX);
+             p1.setPos_y(p1.getPos_y() + deltaY);
+         }
+     }
 
      public void rotate(double angle) {
         // TODO implement here

@@ -24,13 +24,44 @@ public class Line extends Shape {
     //
     // Methods
     //
-        public void draw(char[][] canvas) {
-            // TODO implement here
+    @Override
+    public void draw(char[][] canvas) {
+        // Draw the Line on the canvas
+        if (p1 == null || p2 == null) return;
+        
+        int x1 = p1.getPos_x();
+        int y1 = p1.getPos_y();
+        int x2 = p2.getPos_x();
+        int y2 = p2.getPos_y();
+        
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+        int sx = x1 < x2 ? 1 : -1;
+        int sy = y1 < y2 ? 1 : -1;
+        int err = dx - dy;
+        
+        int x = x1;
+        int y = y1;
+        
+        while (true) {
+            if (y >= 0 && y < canvas.length && x >= 0 && x < canvas[y].length) {
+                canvas[y][x] = '*';
+            }
+            if (x == x2 && y == y2) break;
+            int e2 = 2 * err;
+            if (e2 > -dy) err -= dy;
+            if (e2 < dx) err += dx;
+            x += sx;
+            y += sy;
         }
-
-    public void translate(int x, int y) {
-        // TODO implement here
     }
+
+    public void translate(int deltaX, int deltaY) {
+         if (p1 != null) {
+             p1.setPos_x(p1.getPos_x() + deltaX);
+             p1.setPos_y(p1.getPos_y() + deltaY);
+         }
+     }
 
     public void rotate(double angle) {
         // TODO implement here
