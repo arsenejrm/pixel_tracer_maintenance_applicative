@@ -24,6 +24,31 @@ public class Line extends Shape {
     //
     // Methods
     //
+        public void draw(char[][] canvas) {
+            // TODO implement here
+        }
+
+    public void translate(int x, int y) {
+        // TODO implement here
+    }
+
+    public void rotate(int angle) {
+        // TODO implement here
+    }   
+
+        public void scale(double factor) {
+            // TODO implement here
+        }
+
+    
+        public void changeColor(String color) {
+            // TODO implement here
+        }
+
+        public void resize(double factor) {
+            // TODO implement here
+        }
+
 
 
     //
