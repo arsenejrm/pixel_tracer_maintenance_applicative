@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class Square
  */
-public class Square extends Shape, Shape, Shape {
+public class Square extends Shape {
 
     //
     // Fields
@@ -17,7 +17,9 @@ public class Square extends Shape, Shape, Shape {
     //
     // Constructors
     //
-    public Square () { };
+    public Square () {
+        super(0);
+     };
     
     //
     // Methods
@@ -66,8 +68,12 @@ public class Square extends Shape, Shape, Shape {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Square{" +
+                "lenght=" + lenght +
+                ", p1=" + p1 +
+                '}';
     }
 
 

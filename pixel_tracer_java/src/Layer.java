@@ -13,11 +13,14 @@ public class Layer {
     private String name;
     private Boolean visible;
     private Shape list_shapes;
+
     
     //
     // Constructors
     //
-    public Layer () { };
+    public Layer () {
+        
+     };
     
     //
     // Methods
@@ -98,8 +101,14 @@ public class Layer {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Layer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", visible=" + visible +
+                ", list_shapes=" + list_shapes +
+                '}';
     }
 
 
@@ -110,6 +119,7 @@ public class Layer {
      */
     public Layer Layer(Integer id, String name)
     {
+        return new Layer();
     }
 
 
@@ -126,6 +136,7 @@ public class Layer {
      */
     public void add_shape_to_layer(Shape shape)
     {
+        this.list_shapes = shape;   
     }
 
 
@@ -134,6 +145,9 @@ public class Layer {
      */
     public void remove_shape_from_layer(Integer id)
     {
+        if (this.list_shapes.getId() == id) {
+            this.list_shapes = null;
+        }
     }
 
 

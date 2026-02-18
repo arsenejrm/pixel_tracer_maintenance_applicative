@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class Line
  */
-public class Line extends Shape, Shape {
+public class Line extends Shape {
 
     //
     // Fields
@@ -17,7 +17,9 @@ public class Line extends Shape, Shape {
     //
     // Constructors
     //
-    public Line () { };
+    public Line () {
+        super(0);
+     };
     
     //
     // Methods
@@ -66,8 +68,12 @@ public class Line extends Shape, Shape {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Line{" +
+                "p1=" + p1 +
+                ", p2=" + p2 +
+                '}';
     }
 
 

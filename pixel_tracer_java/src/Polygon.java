@@ -16,7 +16,9 @@ public class Polygon extends Shape {
     //
     // Constructors
     //
-    public Polygon () { };
+    public Polygon () {
+        super(0);
+     };
     
     //
     // Methods
@@ -49,8 +51,11 @@ public class Polygon extends Shape {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Polygon{" +
+                "n=" + n +
+                '}';
     }
 
 

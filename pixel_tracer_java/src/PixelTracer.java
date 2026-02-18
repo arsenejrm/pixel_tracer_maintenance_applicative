@@ -17,7 +17,8 @@ public class PixelTracer {
     //
     // Constructors
     //
-    public PixelTracer () { };
+    public PixelTracer () {
+     };
     
     //
     // Methods
@@ -98,8 +99,14 @@ public class PixelTracer {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "PixelTracer{" +
+                "list_areas=" + list_areas +
+                ", current_area=" + current_area +
+                ", current_layer=" + current_layer +
+                ", current_shape=" + current_shape +
+                '}';
     }
 
 
@@ -124,6 +131,7 @@ public class PixelTracer {
      */
     public PixelTracer PixelTracer()
     {
+        return new PixelTracer();
     }
 
 

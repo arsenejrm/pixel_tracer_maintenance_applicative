@@ -18,7 +18,9 @@ public class Rectangle extends Shape {
     //
     // Constructors
     //
-    public Rectangle () { };
+    public Rectangle () {
+        super(0);
+     };
     
     //
     // Methods
@@ -83,8 +85,13 @@ public class Rectangle extends Shape {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Rectangle{" +
+                "height=" + height +
+                ", width=" + width +
+                ", p1=" + p1 +
+                '}';
     }
 
 

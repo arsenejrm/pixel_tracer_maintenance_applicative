@@ -149,8 +149,17 @@ public class Area {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Area{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", width=" + width +
+                ", height=" + height +
+                ", list_layers=" + list_layers +
+                ", empty_char=" + empty_char +
+                ", full_char=" + full_char +
+                '}';
     }
 
 
@@ -161,8 +170,9 @@ public class Area {
      * @param        id
      * @param        name
      */
-    public Area Area(Integer width, Integer height, Integer id, String name)
-    {
+    public Area Area(Integer width, Integer height, Integer id, String name){
+        
+        return new Area();
     }
 
 
@@ -170,14 +180,18 @@ public class Area {
      */
     public void clear()
     {
+        this.list_layers = null;
+        this.empty_char = null;
+        this.full_char = null;
+
     }
 
 
     /**
      * @param        layer
      */
-    public void add_layer(Layer layer)
-    {
+    public void add_layer(Layer layer){
+        this.list_layers = layer;
     }
 
 
@@ -186,13 +200,18 @@ public class Area {
      */
     public void remove_layer(Integer layer_id)
     {
+        if (this.list_layers.getId() == layer_id) {
+            this.list_layers = null;
+        }
     }
 
 
     /**
      */
-    public void draw_area()
-    {
+    public void draw_area(){
+        if (this.list_layers != null) {
+            this.list_layers.draw_layer();
+        }
     }
 
 
@@ -201,6 +220,9 @@ public class Area {
      */
     public void draw_layer(Integer layer_id)
     {
+        if (this.list_layers.getId() == layer_id) {
+            this.list_layers.draw_layer();
+        }
     }
 
 

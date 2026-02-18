@@ -17,7 +17,9 @@ public class Circle extends Shape {
     //
     // Constructors
     //
-    public Circle () { };
+    public Circle () {
+        super(0);
+     };
     
     //
     // Methods
@@ -66,8 +68,12 @@ public class Circle extends Shape {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Circle{" +
+                "radius=" + radius +
+                ", center=" + center +
+                '}';
     }
 
 
