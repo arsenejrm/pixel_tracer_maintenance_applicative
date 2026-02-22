@@ -1,66 +1,37 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Class PixelTracer
  */
 public class PixelTracer {
 
-    //
-    // Fields
-    //
-
-    private Area list_areas;
+    private final Integer width = 80;
+    private final Integer height = 40;
+    private ArrayList<Area> list_areas;
     private Area current_area;
-    private Layer current_layer;
-    private Shape current_shape;
-    private ArrayList<ArrayList<Character>> pixel_map;
-    
-    //
-    // Constructors
-    //
+
+
     public PixelTracer (int width, int height) {
-        this.pixel_map = new ArrayList<>();
-        Character pixel = '.';
-        for (int i = 0; i < height; i++) {
-            ArrayList<Character> pixel_line = new ArrayList<>();
-            for (int j = 0; j < width; j++) {
-                pixel_line.add(pixel);
-            }
-            this.pixel_map.add(pixel_line);
-        }
+        this.list_areas = new ArrayList<>();
+        this.current_area = new Area(width, height, UUID.randomUUID(), "Area1");
+        this.list_areas.add(this.current_area);
     };
-    
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
-    /**
-     * Set the value of list_areas
-     * @param newVar the new value of list_areas
-     */
-    public void setList_areas (Area newVar) {
-        list_areas = newVar;
-    }
 
     /**
      * Get the value of list_areas
      * @return the value of list_areas
      */
-    public Area getList_areas () {
-        return list_areas;
+    public ArrayList<Area> getList_areas () {
+        return this.list_areas;
     }
 
     /**
      * Set the value of current_area
      * @param newVar the new value of current_area
      */
-    public void setCurrent_area (Area newVar) {
-        current_area = newVar;
+    public void setCurrent_area (Area par_current_area) {
+        this.current_area = par_current_area;
     }
 
     /**
@@ -71,41 +42,6 @@ public class PixelTracer {
         return current_area;
     }
 
-    /**
-     * Set the value of current_layer
-     * @param newVar the new value of current_layer
-     */
-    public void setCurrent_layer (Layer newVar) {
-        current_layer = newVar;
-    }
-
-    /**
-     * Get the value of current_layer
-     * @return the value of current_layer
-     */
-    public Layer getCurrent_layer () {
-        return current_layer;
-    }
-
-    /**
-     * Set the value of current_shape
-     * @param newVar the new value of current_shape
-     */
-    public void setCurrent_shape (Shape newVar) {
-        current_shape = newVar;
-    }
-
-    /**
-     * Get the value of current_shape
-     * @return the value of current_shape
-     */
-    public Shape getCurrent_shape () {
-        return current_shape;
-    }
-
-    //
-    // Other methods
-    //
 
     /**
      */
@@ -115,8 +51,6 @@ public class PixelTracer {
         return "PixelTracer{" +
                 "list_areas=" + list_areas +
                 ", current_area=" + current_area +
-                ", current_layer=" + current_layer +
-                ", current_shape=" + current_shape +
                 '}';
     }
 
@@ -126,14 +60,20 @@ public class PixelTracer {
      */
     public void add_area(Area area)
     {
+        this.list_areas.add(area);
     }
 
 
     /**
      * @param        id_area
      */
-    public void remove_area(Integer id_area)
+    public void remove_area(UUID id_area)
     {
+        for (int i = 0; i < this.list_areas.size(); i++) {
+            if (this.list_areas.get(i).getId().equals(id_area)) {
+                this.list_areas.remove(i);
+            }
+        }
     }
 
 
@@ -186,10 +126,43 @@ public class PixelTracer {
                     \tset layer {visible, unvisible} {id}
                 """;
             }
-                        
-            case "plot" -> {
-                String string_map = "";
 
+            case "new" -> {
+                if (command_params.isEmpty()) {
+                    return error_param;
+                } else if (command_params.get(0).equals("area")) {
+                    this.current_area = new Area(this.width, this.height, UUID.randomUUID(), "area_name");
+                    this.list_areas.add(this.current_area);
+                }
+                return "done";
+            }
+
+            case "list" -> {
+                String info_list = "";
+                if (command_params.isEmpty()) {
+                    return error_param;
+                } else if (command_params.get(0).equals("areas")) {
+                    for (Area area : this.list_areas) {
+                        if (area == this.current_area) {
+                            info_list += " *   ";
+                        } else {
+                            info_list += " -   ";
+                        }
+                        info_list += area.toString() + "\n";
+                    }
+                } else {
+                    return error_param;
+                }
+                info_list += "done";
+                return info_list;
+            }
+
+            case "plot" -> {
+                if (!command_params.isEmpty()) {
+                    return error_param;
+                }
+                ArrayList<ArrayList<Character>> pixel_map = this.current_area.getPixel_map();
+                String string_map = "";
                 for (int i = 0; i < pixel_map.size(); i++) {
                     StringBuilder sb = new StringBuilder();
                     for (int j = 0; j < pixel_map.get(i).size(); j++) {
@@ -201,10 +174,16 @@ public class PixelTracer {
             }
 
             case "clear" -> {
+                if (!command_params.isEmpty()) {
+                    return error_param;
+                }
                 return "clear";
             }
 
             case "exit" -> {
+                if (!command_params.isEmpty()) {
+                    return error_param;
+                }
                 return "exit";
             }
 

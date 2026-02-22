@@ -1,5 +1,5 @@
-import java.util.UUID;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Class Area
@@ -11,18 +11,35 @@ public class Area {
     private Integer width;
     private Integer height;
     private ArrayList<Layer> list_layers;
+    private Layer current_layer;
     private Character empty_char;
     private Character full_char;
+    private ArrayList<ArrayList<Character>> pixel_map;
     
 
     public Area (int par_width, int par_height, UUID par_id, String par_name) {
+        this.list_layers = new ArrayList<>();
+        this.current_layer = new Layer();
+        this.list_layers.add(this.current_layer);
         this.width = par_width;
         this.height = par_height;
-        this.list_layers = new ArrayList<>();
         this.id = par_id;
+        this.name = par_name;
         this.empty_char = '.';
         this.full_char = '@';
+        create_pixel_map();
     };
+
+    private void create_pixel_map() {
+        this.pixel_map = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            ArrayList<Character> pixel_line = new ArrayList<>();
+            for (int j = 0; j < width; j++) {
+                pixel_line.add(this.empty_char);
+            }
+            this.pixel_map.add(pixel_line);
+        }
+    }
     
 
     /**
@@ -96,6 +113,22 @@ public class Area {
     public ArrayList<Layer> getList_layers () {
         return this.list_layers;
     }
+    
+    /**
+     * Set the value of empty_char
+     * @param newVar the new value of empty_char
+     */
+    public void setCurrent_layer (Layer par_current_layer) {
+        this.current_layer = par_current_layer;
+    }
+
+    /**
+     * Get the value of empty_char
+     * @return the value of empty_char
+     */
+    public Layer getCurrent_layer () {
+        return this.current_layer;
+    }
 
     /**
      * Set the value of empty_char
@@ -129,33 +162,52 @@ public class Area {
         return this.full_char;
     }
 
+    /**
+     * Set the value of full_char
+     * @param newVar the new value of full_char
+     */
+    public void setPixel_map (ArrayList<ArrayList<Character>> par_pixel_map) {
+        this.pixel_map = par_pixel_map;
+    }
+
+    /**
+     * Get the value of full_char
+     * @return the value of full_char
+     */
+    public ArrayList<ArrayList<Character>> getPixel_map () {
+        return this.pixel_map;
+    }
+
     //
     // Other methods
     //
 
     /**
      */
+    @Override
     public String toString()
     {
-        return "";
+        return this.id + " " + this.name;
     }
 
 
     /**
      * @param        layer
      */
-    public void add_layer(Layer layer){
-        this.list_layers = layer;
+    public void add_layer(Layer par_layer){
+        this.list_layers.add(par_layer);
     }
 
 
     /**
      * @param        layer_id
      */
-    public void remove_layer(Integer layer_id)
+    public void remove_layer(UUID layer_id)
     {
-        if (this.list_layers.getId() == layer_id) {
-            this.list_layers = null;
+        for (Layer layer : list_layers) {
+            if (layer.getId().toString().equals(layer_id.toString())) {
+                list_layers.remove(layer);
+            }
         }
     }
 
@@ -163,8 +215,6 @@ public class Area {
     /**
      */
     public void draw_area(){
-        if (this.list_layers != null) {
-            this.list_layers.draw_layer();
-        }
+        
     }
 }

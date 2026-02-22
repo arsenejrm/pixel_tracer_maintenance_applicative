@@ -1,4 +1,4 @@
-
+import java.util.UUID;
 
 /**
  * Class Layer
@@ -9,7 +9,7 @@ public class Layer {
     // Fields
     //
 
-    private Integer id;
+    private UUID id;
     private String name;
     private Boolean visible;
     private Shape list_shapes;
@@ -35,16 +35,16 @@ public class Layer {
      * Set the value of id
      * @param newVar the new value of id
      */
-    public void setId (Integer newVar) {
-        id = newVar;
+    public void setId (UUID par_id) {
+        this.id = par_id;
     }
 
     /**
      * Get the value of id
      * @return the value of id
      */
-    public Integer getId () {
-        return id;
+    public UUID getId () {
+        return this.id;
     }
 
     /**
