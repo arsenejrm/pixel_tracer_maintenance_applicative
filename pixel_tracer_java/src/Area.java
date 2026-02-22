@@ -40,6 +40,18 @@ public class Area {
             this.pixel_map.add(pixel_line);
         }
     }
+
+    public void update_pixel_map() {
+        for (Layer layer : list_layers) {
+            if (layer.getVisible()) {
+                ArrayList<Pixel> pixels_list = layer.pixel_layer();
+                for (Pixel px : pixels_list) {
+                    this.pixel_map.get(px.getY()).set(px.getX(), layer.getColor_char());
+                }
+            }
+            
+        }
+    }
     
 
     /**

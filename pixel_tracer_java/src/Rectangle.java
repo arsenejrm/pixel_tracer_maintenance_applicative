@@ -1,5 +1,4 @@
 
-import java.util.*;
 
 
 /**
@@ -112,7 +111,7 @@ public class Rectangle extends Shape {
      * @param newVar the new value of height
      */
     public void setHeight (int newVar) {
-        height = newVar;
+        this.height = newVar;
     }
 
     /**
@@ -120,7 +119,7 @@ public class Rectangle extends Shape {
      * @return the value of height
      */
     public int getHeight () {
-        return height;
+        return this.height;
     }
 
     /**
@@ -128,7 +127,7 @@ public class Rectangle extends Shape {
      * @param newVar the new value of width
      */
     public void setWidth (int newVar) {
-        width = newVar;
+        this.width = newVar;
     }
 
     /**
@@ -136,7 +135,7 @@ public class Rectangle extends Shape {
      * @return the value of width
      */
     public int getWidth () {
-        return width;
+        return this.width;
     }
 
     /**
@@ -144,7 +143,7 @@ public class Rectangle extends Shape {
      * @param newVar the new value of p1
      */
     public void setP1 (Point newVar) {
-        p1 = newVar;
+        this.p1 = newVar;
     }
 
     /**
@@ -152,7 +151,7 @@ public class Rectangle extends Shape {
      * @return the value of p1
      */
     public Point getP1 () {
-        return p1;
+        return this.p1;
     }
 
     //

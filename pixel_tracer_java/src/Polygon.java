@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 
@@ -11,8 +10,7 @@ public class Polygon extends Shape {
     // Fields
     //
 
-    private int n;
-    private List<Point> points;
+    private ArrayList<Point> points;
 
     //
     // Constructors
@@ -21,15 +19,13 @@ public class Polygon extends Shape {
         super(0);
      };
     
-    public Polygon(int n, List<Point> points) {
+    public Polygon(ArrayList<Point> points) {
         super(0);
-        this.n = n;
         this.points = points;
     }
 
-    public Polygon(int id, int n, List<Point> points) {
+    public Polygon(int id, int n, ArrayList<Point> points) {
         super(id);
-        this.n = n;
         this.points = points;
     }
     
@@ -37,9 +33,9 @@ public class Polygon extends Shape {
     // Methods
     //
     public void draw(char[][] canvas) {
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < points.size(); i++) {
             Point p1 = points.get(i);
-            Point p2 = points.get((i+1)%n);
+            Point p2 = points.get((i+1) % points.size());
             Line line = new Line(p1, p2);
             line.draw(canvas);
         }
@@ -63,6 +59,9 @@ public class Polygon extends Shape {
         // TODO implement here
     }
 
+    public ArrayList<Point> getPoints() {
+        return this.points;
+    }
 
      public void scale(double factor) {
         // TODO implement here
@@ -77,39 +76,12 @@ public class Polygon extends Shape {
      public void resize(double factor) {
         // TODO implement here
     }
-    
-
-    //
-    // Accessor methods
-    //
-
-    /**
-     * Set the value of n
-     * @param newVar the new value of n
-     */
-    public void setN (int newVar) {
-        n = newVar;
-    }
-
-    /**
-     * Get the value of n
-     * @return the value of n
-     */
-    public int getN () {
-        return n;
-    }
-
-    //
-    // Other methods
-    //
 
     /**
      */
     public String toString()
     {
-        return "Polygon{" +
-                "n=" + n +
-                '}';
+        return "Polygon";
     }
 
 

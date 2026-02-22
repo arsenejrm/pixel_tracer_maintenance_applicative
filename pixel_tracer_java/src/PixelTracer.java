@@ -81,6 +81,7 @@ public class PixelTracer {
         String error_unknown = "commande inconnue";
         String error_empty = "commande manquante";
         String error_param = "erreur paramètres, consulter la commande help";
+        String action_completed = "done";
 
         String[] splitted_input = user_input.split(" ");
         if (splitted_input.length == 0) {
@@ -134,7 +135,7 @@ public class PixelTracer {
                     this.current_area = new Area(this.width, this.height, UUID.randomUUID(), "area_name");
                     this.list_areas.add(this.current_area);
                 }
-                return "done";
+                return action_completed;
             }
 
             case "list" -> {
@@ -153,14 +154,126 @@ public class PixelTracer {
                 } else {
                     return error_param;
                 }
-                info_list += "done";
+                info_list += action_completed;
                 return info_list;
+            }
+
+            case "point" -> {
+                if (command_params.isEmpty() || command_params.size() == 1) {
+                    return error_param;
+                } else if (command_params.size() == 2) {
+                    try {
+                        int px = Integer.parseInt(command_params.get(0));
+                        int py = Integer.parseInt(command_params.get(1));
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Point(px, py));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
+            }
+
+            case "line" -> {
+                if (command_params.size() == 4) {
+                    try {
+                        int x1 = Integer.parseInt(command_params.get(0));
+                        int y1 = Integer.parseInt(command_params.get(1));
+                        int x2 = Integer.parseInt(command_params.get(2));
+                        int y2 = Integer.parseInt(command_params.get(3));
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Line(new Point(x1, y1), new Point(x2, y2)));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
+            }
+
+            case "square" -> {
+                if (command_params.size() == 3) {
+                    try {
+                        int x1 = Integer.parseInt(command_params.get(0));
+                        int y1 = Integer.parseInt(command_params.get(1));
+                        int l = Integer.parseInt(command_params.get(2));
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Square(l, new Point(x1, y1)));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
+            }
+
+            case "rectangle" -> {
+                if (command_params.size() == 4) {
+                    try {
+                        int x1 = Integer.parseInt(command_params.get(0));
+                        int y1 = Integer.parseInt(command_params.get(1));
+                        int w = Integer.parseInt(command_params.get(2));
+                        int h = Integer.parseInt(command_params.get(3));
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Rectangle(h, w, new Point(x1, y1)));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
+            }
+
+            case "circle" -> {
+                if (command_params.size() == 3) {
+                    try {
+                        int x = Integer.parseInt(command_params.get(0));
+                        int y = Integer.parseInt(command_params.get(1));
+                        int r = Integer.parseInt(command_params.get(2));
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Circle(r, new Point(x, y)));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
+            }
+
+            case "polygon" -> {
+                if (command_params.size() > 1 && command_params.size() % 2 == 0) {
+                    ArrayList<Point> points = new ArrayList<>();
+                    int params_couples_counter = 0;
+                    try {
+                        while (params_couples_counter * 2 < command_params.size()) {
+                            int xi = Integer.parseInt(command_params.get(params_couples_counter * 2));
+                            int yi = Integer.parseInt(command_params.get(params_couples_counter * 2 + 1));
+                            points.add(new Point(xi, yi));
+                            params_couples_counter++;
+                        }
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Polygon(points));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
+            }
+
+            case "curve" -> {
+                if (command_params.size() == 8) {
+                    try {
+                        int x1 = Integer.parseInt(command_params.get(0));
+                        int y1 = Integer.parseInt(command_params.get(1));
+                        int x2 = Integer.parseInt(command_params.get(2));
+                        int y2 = Integer.parseInt(command_params.get(3));
+                        int x3 = Integer.parseInt(command_params.get(4));
+                        int y3 = Integer.parseInt(command_params.get(5));
+                        int x4 = Integer.parseInt(command_params.get(6));
+                        int y4 = Integer.parseInt(command_params.get(7));
+                        this.current_area.getCurrent_layer().add_shape_to_layer(new Curve(new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), new Point(x4, y4)));
+                        return command_interpreter("plot");
+                    } catch (NumberFormatException e) {}
+                } else {
+                    return error_param;
+                }
             }
 
             case "plot" -> {
                 if (!command_params.isEmpty()) {
                     return error_param;
                 }
+                this.current_area.update_pixel_map();
                 ArrayList<ArrayList<Character>> pixel_map = this.current_area.getPixel_map();
                 String string_map = "";
                 for (int i = 0; i < pixel_map.size(); i++) {
@@ -191,5 +304,6 @@ public class PixelTracer {
                 return error_unknown;
             }
         }
+        return "error : command inerpreter did not find any corresponding case";
     }
 }

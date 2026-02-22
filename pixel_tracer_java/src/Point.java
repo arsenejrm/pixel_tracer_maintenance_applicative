@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class Point
  */
-public abstract class Point extends Shape {
+public class Point extends Shape {
 
     //
     // Fields
@@ -72,22 +72,6 @@ public abstract class Point extends Shape {
      */
     public int getPos_y () {
         return pos_y;
-    }
-
-    //
-    // Other methods
-    //
-    // Déplacement
-    public void translate(int dx, int dy) {
-        this.pos_x += dx;
-        this.pos_y += dy;
-    }
-
-    // Distance entre deux points
-    public double distance(Point other) {
-        int dx = other.pos_x - this.pos_x;
-        int dy = other.pos_y - this.pos_y;
-        return Math.sqrt(dx * dx + dy * dy);
     }
 
     /**

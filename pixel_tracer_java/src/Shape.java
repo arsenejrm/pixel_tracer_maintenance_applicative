@@ -99,19 +99,6 @@ public abstract class Shape {
     //
 
 
-    // Dessine la forme dans la grille
-    // Draw the shape in the grid
-    public abstract void draw(char[][] canvas);
-
-    // Déplace la forme
-    // Move the shape
-    public abstract void translate(int dx, int dy);
-
-    // Rotation (optionnelle selon la forme)
-    // Rotation (Optional depending on the form)
-    public abstract void rotate(double angle);
-
-
     /**
      */
     @Override
