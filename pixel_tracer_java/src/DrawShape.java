@@ -16,55 +16,6 @@ public class DrawShape {
     //
     public DrawShape () { };
     
-    //
-    // Methods
-    //
-    
-    public void draw(char[][] canvas) {
-        // TODO implement here
-    }
-    
-    public void translate(int x, int y) {
-        // TODO implement here
-    }
-
-    public void rotate(double angle) {
-        // TODO implement here
-    }
-
-    public void scale(double factor) {
-        // TODO implement here
-    }
-
-
-    public void changeColor(String color) {
-        // TODO implement here
-    }
-
-    public void resize(double factor) {
-        // TODO implement here
-    }
-
-    public boolean isSquare() {
-        return false;
-    }
-
-    public boolean isPolygon() {
-        return false;
-    }
-    public boolean isCircle() {
-        return false;
-    }
-    public boolean isRectangle() {
-        return false;
-    }
-    
-
-
-
-    //
-    // Accessor methods
-    //
 
     /**
      * Set the value of pixel_list

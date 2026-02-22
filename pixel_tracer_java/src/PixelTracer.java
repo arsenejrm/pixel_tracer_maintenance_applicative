@@ -137,13 +137,8 @@ public class PixelTracer {
     }
 
 
-    /**
-     */
-    public void clear_screen()
-    {
-    }
-
     public String command_interpreter(String user_input) {
+        String error_unknown = "commande inconnue";
         String error_empty = "commande manquante";
         String error_param = "erreur paramètres, consulter la commande help";
 
@@ -214,8 +209,7 @@ public class PixelTracer {
             }
 
             default -> {
-                return "command = " + command_name +
-                        "Commande inconnue. Tapez 'help' pour voir les commandes disponibles.";
+                return error_unknown;
             }
         }
     }
