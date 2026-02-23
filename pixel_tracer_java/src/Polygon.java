@@ -32,13 +32,16 @@ public class Polygon extends Shape {
     //
     // Methods
     //
-    public void draw(char[][] canvas) {
+    @Override
+    public ArrayList<Pixel> draw(char drawn_char) {
+        ArrayList<Pixel> pixels_list = new ArrayList<>();
         for (int i = 0; i < points.size(); i++) {
             Point p1 = points.get(i);
             Point p2 = points.get((i+1) % points.size());
             Line line = new Line(p1, p2);
-            line.draw(canvas);
+            pixels_list.addAll(line.draw(drawn_char));
         }
+        return pixels_list;
     }
 
     public void translate(int x, int y) {
