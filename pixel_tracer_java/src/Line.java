@@ -37,38 +37,50 @@ public class Line extends Shape {
     // Methods
     //
     @Override
-    public ArrayList<Pixel> draw(char drawn_char) {
-        // Draw the Line on the canvas
-        ArrayList<Pixel> pixels = new ArrayList<>();
+public ArrayList<Pixel> draw(char drawn_char) {
 
-        if (this.p1 == null || this.p2 == null) return null;
-        pixels.add(new Pixel(p1.getPos_x(), p1.getPos_y(), drawn_char));
-        pixels.add(new Pixel(p2.getPos_x(), p2.getPos_y(), drawn_char));
+    ArrayList<Pixel> pixels = new ArrayList<>();
 
-        int x1 = p1.getPos_x();
-        int y1 = p1.getPos_y();
-        int x2 = p2.getPos_x();
-        int y2 = p2.getPos_y();
-        
-        int dx = Math.abs(x2 - x1);
-        int dy = Math.abs(y2 - y1);
-        int sx = x1 < x2 ? 1 : -1;
-        int sy = y1 < y2 ? 1 : -1;
-        int err = dx - dy;
-        
-        int x = x1;
-        int y = y1;
-        
-        while (true) {
-            if (x == x2 && y == y2) break;
-            int e2 = 2 * err;
-            if (e2 > -dy) err -= dy;
-            if (e2 < dx) err += dx;
-            x += sx;
-            y += sy;
-        }
+    if (this.p1 == null || this.p2 == null) {
         return pixels;
     }
+
+    int x1 = p1.getPos_x();
+    int y1 = p1.getPos_y();
+    int x2 = p2.getPos_x();
+    int y2 = p2.getPos_y();
+
+    int dx = Math.abs(x2 - x1);
+    int dy = Math.abs(y2 - y1);
+
+    int sx = (x1 < x2) ? 1 : -1;
+    int sy = (y1 < y2) ? 1 : -1;
+
+    int err = dx - dy;
+
+    while (true) {
+        pixels.add(new Pixel(x1, y1, drawn_char));
+
+        if (x1 == x2 && y1 == y2) {
+            break;
+        }
+
+        int e2 = 2 * err;
+
+        if (e2 > -dy) {
+            err -= dy;
+            x1 += sx;
+        }
+
+        if (e2 < dx) {
+            err += dx;
+            y1 += sy;
+        }
+    }
+
+    return pixels;
+}
+
 
     public void translate(int deltaX, int deltaY) {
          if (p1 != null) {
