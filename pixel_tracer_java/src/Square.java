@@ -36,20 +36,48 @@ public class Square extends Shape {
     //
     // Methods
     //
-    public void draw(char[][] canvas) {
-        if (p1 == null || lenght <= 0 || canvas == null) {
-            return;
+    @Override
+    public ArrayList<Pixel> draw(char drawn_char) {
+
+        ArrayList<Pixel> pixels = new ArrayList<>();
+
+        if (p1 == null || lenght <= 0) {
+            return pixels;
         }
-        
+
         int x = p1.getPos_x();
         int y = p1.getPos_y();
-        
-        for (int i = 0; i < lenght && y + i < canvas.length; i++) {
-            for (int j = 0; j < lenght && x + j < canvas[0].length; j++) {
-                canvas[y + i][x + j] = '#';
+
+        Point topLeft = new Point(x, y);
+        Point topRight = new Point(x + lenght - 1, y);
+        Point bottomLeft = new Point(x, y + lenght - 1);
+        Point bottomRight = new Point(x + lenght - 1, y + lenght - 1);
+
+        Line top = new Line(topLeft, topRight);
+        Line right = new Line(topRight, bottomRight);
+        Line bottom = new Line(bottomRight, bottomLeft);
+        Line left = new Line(bottomLeft, topLeft);
+
+        pixels.addAll(top.draw(drawn_char));
+        pixels.addAll(right.draw(drawn_char));
+        pixels.addAll(bottom.draw(drawn_char));
+        pixels.addAll(left.draw(drawn_char));
+
+        // Si on veut un carré rempli (à finir d'implementer)
+        if (getFill()) {
+            for (int i = y + 1; i < y + lenght - 1; i++) {
+                Line fillLine = new Line(
+                        new Point(x + 1, i),
+                        new Point(x + lenght - 2, i)
+                );
+                pixels.addAll(fillLine.draw(drawn_char));
             }
         }
+
+        return pixels;
     }
+
+
     public void translate(int deltaX, int deltaY) {
          if (p1 != null) {
              p1.setPos_x(p1.getPos_x() + deltaX);
