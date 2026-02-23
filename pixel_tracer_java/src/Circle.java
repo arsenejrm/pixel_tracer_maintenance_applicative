@@ -36,14 +36,38 @@ public class Circle extends Shape {
     // Methods
     //
 
-    public void draw(char[][] canvas) {
-        for (int i = 0; i < canvas.length; i++) {
-            for (int j = 0; j < canvas[i].length; j++) {
-                if (Math.pow(i - center.getPos_y(), 2) + Math.pow(j - center.getPos_x(), 2) <= Math.pow(radius, 2)) {
-                    canvas[i][j] = '*';
-                }
+    public ArrayList<Pixel> draw(char drawn_char) {
+                int x = 0;
+        int y = this.getRadius();
+        int d = this.getRadius() - 1;
+        ArrayList<Pixel> pixels_list = new ArrayList<>();
+
+        while (y >= x) {
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() + x, this.getCenter().getPos_y() + y, drawn_char));
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() + y, this.getCenter().getPos_y() + x, drawn_char));
+
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() - x, this.getCenter().getPos_y() + y, drawn_char));
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() - y, this.getCenter().getPos_y() + x, drawn_char));
+
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() + x, this.getCenter().getPos_y() - y, drawn_char));
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() + y, this.getCenter().getPos_y() - x, drawn_char));
+
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() - x, this.getCenter().getPos_y() - y, drawn_char));
+            pixels_list.add(new Pixel(this.getCenter().getPos_x() - y, this.getCenter().getPos_y() - x, drawn_char));
+
+            if (d >= 2 * x) {
+                d -= 2 * x + 1;
+                x++;
+            } else if (d < 2 * (this.getRadius() - y)) {
+                d += 2 * y - 1;
+                y--;
+            } else {
+                d += 2 * (y - x - 1);
+                y--;
+                x++;
             }
         }
+        return pixels_list;
     }
 
     public void translate(int x, int y) {
