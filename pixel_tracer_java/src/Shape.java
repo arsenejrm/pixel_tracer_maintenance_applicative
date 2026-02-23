@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Class Shape
  */
@@ -97,6 +99,11 @@ public abstract class Shape {
     //
     // Other methods
     //
+
+
+    // Dessine la forme dans la grille
+    // Draw the shape in the grid
+    public abstract ArrayList<Pixel> draw();
 
 
     /**

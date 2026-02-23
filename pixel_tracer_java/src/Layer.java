@@ -15,7 +15,7 @@ public class Layer {
     private String name;
     private Boolean visible;
     private ArrayList<Shape> list_shapes;
-    private Character color_char = '@';
+    private Character drawn_char = '@';
 
     
     //
@@ -97,16 +97,16 @@ public class Layer {
      * Set the value of visible
      * @param newVar the new value of visible
      */
-    public void setColor_char (char par_color_char) {
-        this.color_char = par_color_char;
+    public void setDrawn_char (char par_drawn_char) {
+        this.drawn_char = par_drawn_char;
     }
 
     /**
      * Get the value of visible
      * @return the value of visible
      */
-    public Character getColor_char () {
-        return this.color_char;
+    public Character getDrawn_char () {
+        return this.drawn_char;
     }
 
     //
@@ -156,7 +156,7 @@ public class Layer {
         }
     }
 
-
+    /** 
     public ArrayList<Pixel> pixel_layer() {
         ArrayList<Pixel> pixels_layer_list = new ArrayList<>();
         for (Shape shape : this.list_shapes) {
@@ -178,6 +178,21 @@ public class Layer {
         }
         return pixels_layer_list;
     }
+    */
+    public ArrayList<Pixel> draw() {
+
+        ArrayList<Pixel> pixels = new ArrayList<>();
+
+        if (!this.visible) {
+            return pixels;
+        }
+
+        for (Shape shape : list_shapes) {
+            pixels.addAll(shape.draw());
+        }
+
+        return pixels;
+    }
 
 
     /**
@@ -186,7 +201,7 @@ public class Layer {
      */
     public Pixel pixel_point(Point point)
     {
-        return new Pixel(point.getPos_x(), point.getPos_y(), this.color_char);
+        return new Pixel(point.getPos_x(), point.getPos_y(), this.drawn_char);
     }
 
 
@@ -206,7 +221,7 @@ public class Layer {
         yinc = (dy > 0) ? 1 : -1;
         dx = Math.abs(dx);
         dy = Math.abs(dy);
-        pixels_list.add(new Pixel(x, y, this.color_char));
+        pixels_list.add(new Pixel(x, y, this.drawn_char));
         if (dx > dy) {
             cumul = dx / 2;
             for (i = 1; i <= dx; i++) {
@@ -216,7 +231,7 @@ public class Layer {
                     cumul -= dx;
                     y += yinc;
                 }
-                pixels_list.add(new Pixel(x, y, this.color_char));
+                pixels_list.add(new Pixel(x, y, this.drawn_char));
             }
         } else {
             cumul = dy / 2;
@@ -227,7 +242,7 @@ public class Layer {
                     cumul -= dy;
                     x += xinc;
                 }
-                pixels_list.add(new Pixel(x, y, this.color_char));
+                pixels_list.add(new Pixel(x, y, this.drawn_char));
             }
         }
         return pixels_list;
@@ -254,17 +269,17 @@ public class Layer {
         ArrayList<Pixel> pixels_list = new ArrayList<>();
 
         while (y >= x) {
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + x, cercle.getCenter().getPos_y() + y, this.color_char));
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + y, cercle.getCenter().getPos_y() + x, this.color_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + x, cercle.getCenter().getPos_y() + y, this.drawn_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + y, cercle.getCenter().getPos_y() + x, this.drawn_char));
 
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - x, cercle.getCenter().getPos_y() + y, this.color_char));
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - y, cercle.getCenter().getPos_y() + x, this.color_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - x, cercle.getCenter().getPos_y() + y, this.drawn_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - y, cercle.getCenter().getPos_y() + x, this.drawn_char));
 
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + x, cercle.getCenter().getPos_y() - y, this.color_char));
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + y, cercle.getCenter().getPos_y() - x, this.color_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + x, cercle.getCenter().getPos_y() - y, this.drawn_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() + y, cercle.getCenter().getPos_y() - x, this.drawn_char));
 
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - x, cercle.getCenter().getPos_y() - y, this.color_char));
-            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - y, cercle.getCenter().getPos_y() - x, this.color_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - x, cercle.getCenter().getPos_y() - y, this.drawn_char));
+            pixels_list.add(new Pixel(cercle.getCenter().getPos_x() - y, cercle.getCenter().getPos_y() - x, this.drawn_char));
 
             if (d >= 2 * x) {
                 d -= 2 * x + 1;
@@ -381,7 +396,7 @@ public class Layer {
 
         for (t = 0; t < 1.0; t += 0.0001) {
             ArrayList<Point> cjp1 = cj_calc(curve_points, curve_points.size(), t);
-            pixels_list.add(new Pixel(cjp1.get(0).getPos_x(), cjp1.get(0).getPos_y(), this.color_char));
+            pixels_list.add(new Pixel(cjp1.get(0).getPos_x(), cjp1.get(0).getPos_y(), this.drawn_char));
         }
         return pixels_list;
     }

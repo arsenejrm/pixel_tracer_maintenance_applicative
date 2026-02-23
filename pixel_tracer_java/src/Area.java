@@ -44,9 +44,9 @@ public class Area {
     public void update_pixel_map() {
         for (Layer layer : list_layers) {
             if (layer.getVisible()) {
-                ArrayList<Pixel> pixels_list = layer.pixel_layer();
+                ArrayList<Pixel> pixels_list = layer.draw();
                 for (Pixel px : pixels_list) {
-                    this.pixel_map.get(px.getY()).set(px.getX(), layer.getColor_char());
+                    this.pixel_map.get(px.getY()).set(px.getX(), layer.getDrawn_char());
                 }
             }
             

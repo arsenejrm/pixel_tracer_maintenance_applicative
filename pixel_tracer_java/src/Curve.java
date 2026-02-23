@@ -11,39 +11,93 @@ public class Curve extends Shape {
     // Fields
     //
 
-    private Point p1;
-    private Point p2;
-    private Point p3;
-    private Point p4;
-    
+    private ArrayList<Point> controlPoints;
+
     //
     // Constructors
     //
-    public Curve () {
-        super(0);
-     };
-    public Curve (Point p1, Point p2, Point p3, Point p4) {
-        super(0);
-        this.p1 = p1;
-        this.p2 = p2;
-        this.p3 = p3;
-        this.p4 = p4;
-     };
 
-    public Curve(int id, Point p1, Point p2, Point p3, Point p4) {
+    // Constructeur vide
+    public Curve() {
+        super(0);
+        this.controlPoints = new ArrayList<>();
+    }
+
+    // Constructeur avec ID
+    public Curve(int id, List<Point> points) {
         super(id);
-        this.p1 = p1;
-        this.p2 = p2;
-        this.p3 = p3;
-        this.p4 = p4;
-     }
-     
+        setControlPoints(points);
+    }
+
+    // Constructeur sans ID
+    public Curve(List<Point> points) {
+        super(0);
+        setControlPoints(points);
+    }
+
+    // Varargs
+    public Curve(Point... points) {
+        super(0);
+        setControlPoints(Arrays.asList(points));
+    }
+
+
+
     //
     // Methods
     //
-        public void draw(char[][] canvas) {
-            // TODO implement here
+    private void setControlPoints(List<Point> points) {
+    if (points.size() < 3) {
+        throw new IllegalArgumentException(
+            "Une courbe doit avoir au minimum 3 points"
+        );
+    }
+    this.controlPoints = new ArrayList<>(points);
+}
+
+    @Override
+    public ArrayList<Pixel> draw() {
+        ArrayList<Pixel> pixels = new ArrayList<>();
+
+        for (double t = 0; t <= 1.0; t += 0.0005) {
+
+            Point p = cj_calc(controlPoints, controlPoints.size(), t).get(0);
+
+            int x = p.getPos_x();
+            int y = p.getPos_y();
+            pixels.add(new Pixel(x, y, '@'));
         }
+        return pixels;
+    }
+    
+    /**
+     * @return       Point
+     * @param        p1
+     * @param        p2
+     * @param        t
+     */
+    public Point calc_median(Point p1, Point p2, double t)
+    {
+        int x = (int) (p1.getPos_x() * (1 - t) + p2.getPos_x() * t);
+        int y = (int) (p1.getPos_y() * (1 - t) + p2.getPos_y() * t);
+        Point result = new Point(x, y);
+        return result;
+    }
+
+    public ArrayList<Point> cj_calc(ArrayList<Point> points, int num_pt, double t) {
+        ArrayList<Point> tmp_points = new ArrayList<>();
+        for (int i = 0; i < num_pt; i++) {
+            tmp_points.add(points.get(i));
+        }
+        for (int i = num_pt - 1; i > 0; --i) {
+            ArrayList<Point> new_points = new ArrayList<>();
+            for (int j = 0; j < i; ++j) {
+                new_points.add(calc_median(tmp_points.get(j), tmp_points.get(j + 1), t));
+            }
+            tmp_points = new_points;
+        }
+        return tmp_points;
+    }
     
     public void translate(int x, int y) {
         // TODO implement here
