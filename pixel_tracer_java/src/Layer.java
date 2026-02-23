@@ -364,9 +364,11 @@ public class Layer {
             tmp_points.add(points.get(i));
         }
         for (int i = num_pt - 1; i > 0; --i) {
+            ArrayList<Point> new_points = new ArrayList<>();
             for (int j = 0; j < i; ++j) {
-                tmp_points.add(j, calc_median(tmp_points.get(j), tmp_points.get(j + 1), t));
+                new_points.add(calc_median(tmp_points.get(j), tmp_points.get(j + 1), t));
             }
+            tmp_points = new_points;
         }
         return tmp_points;
     }
