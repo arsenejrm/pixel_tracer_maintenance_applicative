@@ -111,7 +111,7 @@ public class PixelTracer {
                     \texit : quitter le programme\r
                     \t==== Draw shapes ====\r
                     \tpoint px py : create point a position (px, px)\r
-                    \tline x1 y1 x2 x2 : draw line from (x1, y1) to (x1, y1)\r
+                    \tline x1 y1 x2 y2 : draw line from (x1, y1) to (x2, y2)\r
                     \tsquare x1 y1 l : draw square (x1, y1)  length\r
                     \trectangle x1 y1 w h : draw square (x1, y1)  width height\r
                     \tcircle x y r : center at (x, y) radius r\r

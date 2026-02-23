@@ -57,18 +57,58 @@ public class Curve extends Shape {
 
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
+
         ArrayList<Pixel> pixels = new ArrayList<>();
 
-        for (double t = 0; t <= 1.0; t += 0.0005) {
+        Pixel prev = null;
+
+        for (double t = 0; t <= 1.0; t += 0.001) {
 
             Point p = cj_calc(controlPoints, controlPoints.size(), t).get(0);
 
-            int x = p.getPos_x();
-            int y = p.getPos_y();
-            pixels.add(new Pixel(x, y, drawn_char));
+            Pixel curr = new Pixel(
+                p.getPos_x(),
+                p.getPos_y(),
+                drawn_char
+            );
+
+            if (prev != null) {
+                pixels.addAll(drawSegment(prev, curr, drawn_char));
+            } else {
+                pixels.add(curr);
+            }
+
+            prev = curr;
         }
+
         return pixels;
     }
+
+    private ArrayList<Pixel> drawSegment(Pixel a, Pixel b, char c) {
+
+    ArrayList<Pixel> pixels = new ArrayList<>();
+
+    int x0 = a.getX();
+    int y0 = a.getY();
+    int x1 = b.getX();
+    int y1 = b.getY();
+
+    int dx = Math.abs(x1 - x0);
+    int dy = Math.abs(y1 - y0);
+    int sx = x0 < x1 ? 1 : -1;
+    int sy = y0 < y1 ? 1 : -1;
+    int err = dx - dy;
+
+    while (true) {
+        pixels.add(new Pixel(x0, y0, c));
+        if (x0 == x1 && y0 == y1) break;
+        int e2 = 2 * err;
+        if (e2 > -dy) { err -= dy; x0 += sx; }
+        if (e2 < dx)  { err += dx; y0 += sy; }
+    }
+
+    return pixels;
+}
     
     /**
      * @return       Point
@@ -76,12 +116,10 @@ public class Curve extends Shape {
      * @param        p2
      * @param        t
      */
-    public Point calc_median(Point p1, Point p2, double t)
-    {
-        int x = (int) (p1.getPos_x() * (1 - t) + p2.getPos_x() * t);
-        int y = (int) (p1.getPos_y() * (1 - t) + p2.getPos_y() * t);
-        Point result = new Point(x, y);
-        return result;
+    public Point calc_median(Point p1, Point p2, double t) {
+        double x = p1.getPos_x() * (1 - t) + p2.getPos_x() * t;
+        double y = p1.getPos_y() * (1 - t) + p2.getPos_y() * t;
+        return new Point((int)Math.round(x), (int)Math.round(y));
     }
 
     public ArrayList<Point> cj_calc(ArrayList<Point> points, int num_pt, double t) {
@@ -125,69 +163,24 @@ public class Curve extends Shape {
     // Accessor methods
     //
 
-    /**
-     * Set the value of p1
-     * @param newVar the new value of p1
-     */
-    public void setP1 (Point newVar) {
-        p1 = newVar;
+        /**
+        * Set the value of controlPoints
+        * @param newVar the new value of controlPoints
+        */
+    public void setControlPoints (ArrayList<Point> newVar) {
+        controlPoints = newVar;
     }
 
     /**
-     * Get the value of p1
-     * @return the value of p1
-     */
-    public Point getP1 () {
-        return p1;
+     * Get the value of controlPoints
+     * @return the value of controlPoints
+     */ 
+    public ArrayList<Point> getControlPoints () {
+        return controlPoints;
     }
 
-    /**
-     * Set the value of p2
-     * @param newVar the new value of p2
-     */
-    public void setP2 (Point newVar) {
-        p2 = newVar;
-    }
+    
 
-    /**
-     * Get the value of p2
-     * @return the value of p2
-     */
-    public Point getP2 () {
-        return p2;
-    }
-
-    /**
-     * Set the value of p3
-     * @param newVar the new value of p3
-     */
-    public void setP3 (Point newVar) {
-        p3 = newVar;
-    }
-
-    /**
-     * Get the value of p3
-     * @return the value of p3
-     */
-    public Point getP3 () {
-        return p3;
-    }
-
-    /**
-     * Set the value of p4
-     * @param newVar the new value of p4
-     */
-    public void setP4 (Point newVar) {
-        p4 = newVar;
-    }
-
-    /**
-     * Get the value of p4
-     * @return the value of p4
-     */
-    public Point getP4 () {
-        return p4;
-    }
 
     //
     // Other methods
@@ -195,8 +188,11 @@ public class Curve extends Shape {
 
     /**
      */
-    public void toString()
+    public String toString()
     {
+        return "Curve{" +
+                "controlPoints=" + controlPoints +
+                '}';
     }
 
 

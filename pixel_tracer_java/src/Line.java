@@ -39,8 +39,12 @@ public class Line extends Shape {
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
         // Draw the Line on the canvas
+        ArrayList<Pixel> pixels = new ArrayList<>();
+
         if (this.p1 == null || this.p2 == null) return null;
-        
+        pixels.add(new Pixel(p1.getPos_x(), p1.getPos_y(), drawn_char));
+        pixels.add(new Pixel(p2.getPos_x(), p2.getPos_y(), drawn_char));
+
         int x1 = p1.getPos_x();
         int y1 = p1.getPos_y();
         int x2 = p2.getPos_x();
@@ -56,9 +60,6 @@ public class Line extends Shape {
         int y = y1;
         
         while (true) {
-            if (y >= 0 && y < canvas.length && x >= 0 && x < canvas[y].length) {
-                canvas[y][x] = '*';
-            }
             if (x == x2 && y == y2) break;
             int e2 = 2 * err;
             if (e2 > -dy) err -= dy;
@@ -66,6 +67,7 @@ public class Line extends Shape {
             x += sx;
             y += sy;
         }
+        return pixels;
     }
 
     public void translate(int deltaX, int deltaY) {
