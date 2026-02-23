@@ -103,7 +103,7 @@ public abstract class Shape {
 
     // Dessine la forme dans la grille
     // Draw the shape in the grid
-    public abstract ArrayList<Pixel> draw();
+    public abstract ArrayList<Pixel> draw(char drawn_char);
 
 
     /**

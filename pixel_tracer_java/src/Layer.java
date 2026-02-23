@@ -184,11 +184,11 @@ public class Layer {
         ArrayList<Pixel> pixels = new ArrayList<>();
 
         if (!this.visible) {
-            return pixels;
+            return null;
         }
 
         for (Shape shape : list_shapes) {
-            pixels.addAll(shape.draw());
+            pixels.addAll(shape.draw(this.drawn_char));
         }
 
         return pixels;

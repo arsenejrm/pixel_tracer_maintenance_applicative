@@ -37,6 +37,10 @@ public class Point extends Shape {
     // Methods
     //
 
+    @Override
+    public ArrayList<Pixel> draw(char drawn_char) {
+        return new ArrayList<Pixel>(Arrays.asList(new Pixel(this.getPos_x(), this.getPos_y(), drawn_char)));
+    }
 
     //
     // Accessor methods

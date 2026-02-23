@@ -56,7 +56,7 @@ public class Curve extends Shape {
 }
 
     @Override
-    public ArrayList<Pixel> draw() {
+    public ArrayList<Pixel> draw(char drawn_char) {
         ArrayList<Pixel> pixels = new ArrayList<>();
 
         for (double t = 0; t <= 1.0; t += 0.0005) {
@@ -65,7 +65,7 @@ public class Curve extends Shape {
 
             int x = p.getPos_x();
             int y = p.getPos_y();
-            pixels.add(new Pixel(x, y, '@'));
+            pixels.add(new Pixel(x, y, drawn_char));
         }
         return pixels;
     }
