@@ -80,11 +80,22 @@ public class Polygon extends Shape {
         // TODO implement here
     }
 
+
+    public String points_toString() {
+        String str_out = "";
+        for (Point point : this.getPoints()) {
+            str_out += point.getPos_x() + " " + point.getPos_y() + " ";
+        }
+        return str_out;
+    }
+
+
     /**
      */
+    @Override
     public String toString()
     {
-        return "Polygon";
+        return super.toString() + " POLYGON " + points.toString();
     }
 
 

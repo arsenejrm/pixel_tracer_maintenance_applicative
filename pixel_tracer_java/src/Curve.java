@@ -186,13 +186,21 @@ public class Curve extends Shape {
     // Other methods
     //
 
+    public String points_toString() {
+        String str_out = "";
+        for (Point point : this.controlPoints) {
+            str_out += point.getPos_x() + " " + point.getPos_y() + " ";
+        }
+        return str_out;
+    }
+
+
     /**
      */
+    @Override
     public String toString()
     {
-        return "Curve{" +
-                "controlPoints=" + controlPoints +
-                '}';
+        return super.toString() + " CURVE" + points_toString();
     }
 
 

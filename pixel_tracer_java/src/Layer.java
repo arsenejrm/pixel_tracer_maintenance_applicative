@@ -118,12 +118,7 @@ public class Layer {
     @Override
     public String toString()
     {
-        return "Layer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", visible=" + visible +
-                ", list_shapes=" + list_shapes +
-                '}';
+        return this.id + " " + ((this.visible) ? "(V)" : "(H)") + " " + this.name;
     }
 
 

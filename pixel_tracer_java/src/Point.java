@@ -83,7 +83,7 @@ public class Point extends Shape {
     @Override
     public String toString()
     {
-        return "(" + this.pos_x + this.pos_y + ")";
+        return super.toString() + " POINT " + this.pos_x + " " + this.pos_y;
     }
 
 

@@ -190,11 +190,7 @@ public class Rectangle extends Shape {
      */
     public String toString()
     {
-        return "Rectangle{" +
-                "height=" + height +
-                ", width=" + width +
-                ", p1=" + p1 +
-                '}';
+        return super.toString() + " RECTANGLE " + this.p1.getPos_x() + " " + this.p1.getPos_y() + " " + this.width + " " + this.height;
     }
 
 

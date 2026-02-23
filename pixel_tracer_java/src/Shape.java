@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Class Shape
@@ -9,7 +10,7 @@ public abstract class Shape {
     // Fields
     //
 
-    private int id;
+    private UUID id;
     private boolean fill;
     private int thickness;
     private double rotation;
@@ -18,7 +19,7 @@ public abstract class Shape {
     // Constructors
     //
     public Shape(int id) {
-        this.id = id;
+        this.id = UUID.randomUUID();
         this.fill = false;
         this.thickness = 1;
         this.rotation = 0.0;
@@ -36,7 +37,7 @@ public abstract class Shape {
      * Set the value of id
      * @param newVar the new value of id
      */
-    public void setId (int newVar) {
+    public void setId (UUID newVar) {
         id = newVar;
     }
 
@@ -44,7 +45,7 @@ public abstract class Shape {
      * Get the value of id
      * @return the value of id
      */
-    public int getId () {
+    public UUID getId () {
         return id;
     }
 
@@ -110,12 +111,7 @@ public abstract class Shape {
      */
     @Override
     public String toString() {
-        return getClass().getSimpleName() +
-                " [id=" + id +
-                ", filled=" + fill +
-                ", thickness=" + thickness +
-                ", rotation=" + rotation +
-                "]";
+        return this.id.toString();
     }
 
 

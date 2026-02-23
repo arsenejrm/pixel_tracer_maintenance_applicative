@@ -78,10 +78,10 @@ public class PixelTracer {
 
 
     public String command_interpreter(String user_input) {
-        String error_unknown = "commande inconnue";
-        String error_empty = "commande manquante";
-        String error_param = "erreur paramètres, consulter la commande help";
-        String action_completed = "done";
+        String error_unknown = "commande inconnue\n";
+        String error_empty = "commande manquante\n";
+        String error_param = "erreur paramètres, consulter la commande help\n";
+        String action_completed = "done\n";
 
         String[] splitted_input = user_input.split(" ");
         if (splitted_input.length == 0) {
@@ -97,6 +97,7 @@ public class PixelTracer {
             case "" -> {
                 return error_empty;
             }
+
             case "help" -> {
                 if (!command_params.isEmpty()) {
                     return error_param;
@@ -128,6 +129,37 @@ public class PixelTracer {
                 """;
             }
 
+            case "plot" -> {
+                if (!command_params.isEmpty()) {
+                    return error_param;
+                }
+                this.current_area.update_pixel_map();
+                ArrayList<ArrayList<Character>> pixel_map = this.current_area.getPixel_map();
+                String string_map = "";
+                for (int i = 0; i < pixel_map.size(); i++) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int j = 0; j < pixel_map.get(i).size(); j++) {
+                        sb.append(pixel_map.get(i).get(j));
+                    }
+                    string_map += sb + "\n";
+                }
+                return string_map;
+            }
+
+            case "clear" -> {
+                if (!command_params.isEmpty()) {
+                    return error_param;
+                }
+                return "clear";
+            }
+
+            case "exit" -> {
+                if (!command_params.isEmpty()) {
+                    return error_param;
+                }
+                return "exit";
+            }
+
             case "new" -> {
                 if (command_params.isEmpty()) {
                     return error_param;
@@ -150,6 +182,19 @@ public class PixelTracer {
                             info_list += " -   ";
                         }
                         info_list += area.toString() + "\n";
+                    }
+                } else if (command_params.get(0).equals("layers")) {
+                    for (Layer layer : this.current_area.getList_layers()) {
+                        if (layer == this.current_area.getCurrent_layer()) {
+                            info_list += " *   ";
+                        } else {
+                            info_list += " -   ";
+                        }
+                        info_list += layer.toString() + "\n";
+                    }
+                } else if (command_params.get(0).equals("shapes")) {
+                    for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
+                        info_list += " -   " + shape.toString() + "\n";
                     }
                 } else {
                     return error_param;
@@ -275,37 +320,6 @@ public class PixelTracer {
                 } catch (NumberFormatException e) {
                     return error_param;
                 }
-            }
-
-            case "plot" -> {
-                if (!command_params.isEmpty()) {
-                    return error_param;
-                }
-                this.current_area.update_pixel_map();
-                ArrayList<ArrayList<Character>> pixel_map = this.current_area.getPixel_map();
-                String string_map = "";
-                for (int i = 0; i < pixel_map.size(); i++) {
-                    StringBuilder sb = new StringBuilder();
-                    for (int j = 0; j < pixel_map.get(i).size(); j++) {
-                        sb.append(pixel_map.get(i).get(j));
-                    }
-                    string_map += sb + "\n";
-                }
-                return string_map;
-            }
-
-            case "clear" -> {
-                if (!command_params.isEmpty()) {
-                    return error_param;
-                }
-                return "clear";
-            }
-
-            case "exit" -> {
-                if (!command_params.isEmpty()) {
-                    return error_param;
-                }
-                return "exit";
             }
 
             default -> {

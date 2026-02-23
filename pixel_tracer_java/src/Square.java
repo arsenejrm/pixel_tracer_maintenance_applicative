@@ -164,12 +164,10 @@ public class Square extends Shape {
 
     /**
      */
+    @Override
     public String toString()
     {
-        return "Square{" +
-                "lenght=" + lenght +
-                ", p1=" + p1 +
-                '}';
+        return super.toString() + " SQUARE " + this.p1.getPos_x() + " " + this.p1.getPos_y() + " " + this.lenght;
     }
 
 
