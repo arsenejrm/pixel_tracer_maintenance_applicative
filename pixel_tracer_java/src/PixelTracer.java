@@ -106,7 +106,7 @@ public class PixelTracer {
                     \t****         VECTOR TEXT-BASED EDITOR         ****\r
                     \t**************************************************\r
                     \t==== Control ====\r
-                    \tplot : draw dcreen\r
+                    \tplot : draw screen\r
                     \tclear : clear screen\r
                     \texit : quitter le programme\r
                     \t==== Draw shapes ====\r
@@ -114,14 +114,14 @@ public class PixelTracer {
                     \tline x1 y1 x2 x2 : draw line from (x1, y1) to (x1, y1)\r
                     \tsquare x1 y1 l : draw square (x1, y1)  length\r
                     \trectangle x1 y1 w h : draw square (x1, y1)  width height\r
-                    \tcircle x y r : center at (x, y) radus r\r
+                    \tcircle x y r : center at (x, y) radius r\r
                     \tpolygon x1 y1 x2 y2 ... : draw polygon\r
-                    \tcurve x1 y1 x2 y2 x3 y3 x4 y4 : draw Bezier curve\r
+                    \tcurve x1 y1 x2 y2 x3 y3 ... : draw Bezier curve\r
                     \t==== Draw manager ====\r
-                    \tlist {layers, arias, shapes}\r
-                    \tselect {aria, layer} {id}\r
-                    \tdelete {aria, layer, shape} {id}\r
-                    \tnew {aria, layer}\r
+                    \tlist {layers, areas, shapes}\r
+                    \tselect {area, layer} {id}\r
+                    \tdelete {area, layer, shape} {id}\r
+                    \tnew {area, layer}\r
                     \t==== Set ====\r
                     \tset char {border, background} ascii_code\r
                     \tset layer {visible, unvisible} {id}
@@ -251,20 +251,28 @@ public class PixelTracer {
             }
 
             case "curve" -> {
-                if (command_params.size() == 8) {
-                    try {
-                        int x1 = Integer.parseInt(command_params.get(0));
-                        int y1 = Integer.parseInt(command_params.get(1));
-                        int x2 = Integer.parseInt(command_params.get(2));
-                        int y2 = Integer.parseInt(command_params.get(3));
-                        int x3 = Integer.parseInt(command_params.get(4));
-                        int y3 = Integer.parseInt(command_params.get(5));
-                        int x4 = Integer.parseInt(command_params.get(6));
-                        int y4 = Integer.parseInt(command_params.get(7));
-                        this.current_area.getCurrent_layer().add_shape_to_layer(new Curve(new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), new Point(x4, y4)));
-                        return command_interpreter("plot");
-                    } catch (NumberFormatException e) {}
-                } else {
+
+                // minimum 3 points (6 valeurs)
+                if (command_params.size() < 6 || command_params.size() % 2 != 0) {
+                    return error_param;
+                }
+
+                try {
+                    ArrayList<Point> points = new ArrayList<>();
+
+                    for (int i = 0; i < command_params.size(); i += 2) {
+                        int x = Integer.parseInt(command_params.get(i));
+                        int y = Integer.parseInt(command_params.get(i + 1));
+                        points.add(new Point(x, y));
+                    }
+
+                    this.current_area
+                        .getCurrent_layer()
+                        .add_shape_to_layer(new Curve(points));
+
+                    return command_interpreter("plot");
+
+                } catch (NumberFormatException e) {
                     return error_param;
                 }
             }
