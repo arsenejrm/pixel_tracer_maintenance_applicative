@@ -37,9 +37,9 @@ public class Line extends Shape {
     // Methods
     //
     @Override
-    public void draw(char[][] canvas) {
+    public ArrayList<Pixel> draw(char drawn_char) {
         // Draw the Line on the canvas
-        if (p1 == null || p2 == null) return;
+        if (this.p1 == null || this.p2 == null) return null;
         
         int x1 = p1.getPos_x();
         int y1 = p1.getPos_y();
