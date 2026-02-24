@@ -106,6 +106,8 @@ public abstract class Shape {
     // Draw the shape in the grid
     public abstract ArrayList<Pixel> draw(char drawn_char);
 
+    public abstract void translate(UUID id, int dx, int dy);
+
 
     /**
      */

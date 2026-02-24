@@ -325,6 +325,31 @@ public class PixelTracer {
             default -> {
                 return error_unknown;
             }
+            case "translate" -> {
+                if (command_params.size() == 3) {
+                    try {
+                        UUID id = UUID.fromString(command_params.get(0));
+                        int dx = Integer.parseInt(command_params.get(1));
+                        int dy = Integer.parseInt(command_params.get(2));
+
+                        Shape shape = this.current_area
+                                .getCurrent_layer()
+                                .getShapeById(id);
+
+                        if (shape == null) {
+                            return "shape not found\n";
+                        }
+
+                        shape.translate(id, dx, dy);
+                        return command_interpreter("plot");
+
+                    } catch (NumberFormatException e) {
+                        return error_param;
+                    }
+                } else {
+                    return error_param;
+                }
+            }
         }
         return "error : command inerpreter did not find any corresponding case";
     }

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -52,6 +51,15 @@ public class Layer {
     public UUID getId () {
         return this.id;
     }
+
+    public Shape getShapeById(UUID id) {
+    for (Shape shape : this.list_shapes) {
+        if (shape.getId() == id) {
+            return shape;
+        }
+    }
+    return null;
+}
 
     /**
      * Set the value of name
@@ -174,6 +182,8 @@ public class Layer {
         return pixels_layer_list;
     }
     */
+
+    
     public ArrayList<Pixel> draw() {
 
         ArrayList<Pixel> pixels = new ArrayList<>();

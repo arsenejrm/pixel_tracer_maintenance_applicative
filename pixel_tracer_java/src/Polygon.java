@@ -51,9 +51,8 @@ public class Polygon extends Shape {
         }
     }
 
-     public void rotate(double angle) {
-        // TODO implement here
-    }
+
+    
 
      public void addPoint(Point p) {
         // TODO implement here
@@ -66,15 +65,9 @@ public class Polygon extends Shape {
         return this.points;
     }
 
-     public void scale(double factor) {
-        // TODO implement here
-    }
-
      public void changeColor(String color) {
         // TODO implement here
     }
-
-
 
      public void resize(double factor) {
         // TODO implement here

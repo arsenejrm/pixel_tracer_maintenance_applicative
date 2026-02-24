@@ -75,14 +75,15 @@ public class Circle extends Shape {
         center.setPos_y(center.getPos_y() + y);
     }
 
-    public void rotate(double angle) {
-        // TODO implement here
-    }
 
+/*************  ✨ Windsurf Command ⭐  *************/
 
-    public void scale(double factor) {
-        // TODO implement here
-    }   
+    /**
+     * Scales the circle by the given factor.
+     * @param factor The factor to scale by.
+     */
+/*******  e4c04feb-7840-41d8-a4c4-9a9fd08dce7e  *******/
+
 
     public void changeColor(String color) {
         // TODO implement here
@@ -92,9 +93,6 @@ public class Circle extends Shape {
         // TODO implement here
     }
 
-     public boolean isCircle() {
-        return true;
-    }
 
 
     //

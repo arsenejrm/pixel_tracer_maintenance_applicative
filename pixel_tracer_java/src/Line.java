@@ -93,18 +93,15 @@ public ArrayList<Pixel> draw(char drawn_char) {
         // TODO implement here
     }   
 
-        public void scale(double factor) {
-            // TODO implement here
-        }
 
     
-        public void changeColor(String color) {
-            // TODO implement here
-        }
+    public void changeColor(String color) {
+        // TODO implement here
+    }
 
-        public void resize(double factor) {
-            // TODO implement here
-        }
+    public void resize(double factor) {
+        // TODO implement here
+    }
 
 
 

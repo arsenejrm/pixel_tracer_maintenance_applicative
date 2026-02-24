@@ -144,10 +144,6 @@ public class Curve extends Shape {
     public void rotate(double angle) {
         // TODO implement here
     }
-    
-    public void scale(double factor) {
-        // TODO implement here
-    }
 
 
     public void changeColor(String color) {

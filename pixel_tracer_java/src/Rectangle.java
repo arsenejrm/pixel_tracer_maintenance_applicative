@@ -87,14 +87,9 @@ public class Rectangle extends Shape {
              p1.setPos_y(p1.getPos_y() + deltaY);
          }
      }
-
-    public void rotate(double angle) {
-        // Rotation logic
-    }   
-
-     public void scale(double factor) {
-        height = (int)(height * factor);
-        width = (int)(width * factor);
+    
+    public void changeColor(String color) {
+        // TODO implement here
     }
 
     public void resize(double factor) {
