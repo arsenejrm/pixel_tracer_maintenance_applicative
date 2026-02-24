@@ -7,7 +7,7 @@ import java.util.UUID;
 public class PixelTracer {
 
     private final Integer width = 80;
-    private final Integer height = 40;
+    private final Integer height = 50;
     private ArrayList<Area> list_areas;
     private Area current_area;
 

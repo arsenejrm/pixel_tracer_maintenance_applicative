@@ -13,7 +13,6 @@ public class Area {
     private ArrayList<Layer> list_layers;
     private Layer current_layer;
     private Character empty_char;
-    private Character full_char;
     private ArrayList<ArrayList<Character>> pixel_map;
     
 
@@ -26,7 +25,6 @@ public class Area {
         this.id = par_id;
         this.name = par_name;
         this.empty_char = '.';
-        this.full_char = '@';
         create_pixel_map();
     };
 
@@ -46,13 +44,18 @@ public class Area {
             if (layer.getVisible()) {
                 ArrayList<Pixel> pixels_list = layer.draw();
                 for (Pixel px : pixels_list) {
-                    this.pixel_map.get(px.getY()).set(px.getX(), layer.getDrawn_char());
+                    // Décalage des coordonnées
+                    int x = px.getX() - 1;
+                    int y = px.getY() - 1;
+
+                    // Vérifier qu'on est dans les limites
+                    if (x >= 0 && x < width && y >= 0 && y < height) {
+                        this.pixel_map.get(y).set(x, layer.getDrawn_char());
+                    }
                 }
             }
-            
         }
     }
-    
 
     /**
      * Set the value of id
@@ -158,33 +161,18 @@ public class Area {
         return this.empty_char;
     }
 
-    /**
-     * Set the value of full_char
-     * @param newVar the new value of full_char
-     */
-    public void setFull_char (Character par_full_char) {
-        this.full_char = par_full_char;
-    }
 
     /**
-     * Get the value of full_char
-     * @return the value of full_char
-     */
-    public Character getFull_char () {
-        return this.full_char;
-    }
-
-    /**
-     * Set the value of full_char
-     * @param newVar the new value of full_char
+     * Set the value of drawn_char
+     * @param newVar the new value of drawn_char
      */
     public void setPixel_map (ArrayList<ArrayList<Character>> par_pixel_map) {
         this.pixel_map = par_pixel_map;
     }
 
     /**
-     * Get the value of full_char
-     * @return the value of full_char
+     * Get the value of drawn_char
+     * @return the value of drawn_char
      */
     public ArrayList<ArrayList<Character>> getPixel_map () {
         return this.pixel_map;

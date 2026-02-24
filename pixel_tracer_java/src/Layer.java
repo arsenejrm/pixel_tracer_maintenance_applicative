@@ -142,7 +142,7 @@ public class Layer {
     /**
      * @param        id
      */
-    public void remove_shape_from_layer(Integer id)
+    public void remove_shape_from_layer(UUID id)
     {
         for (Shape shape : this.list_shapes) {
             if (shape.getId() == id) {

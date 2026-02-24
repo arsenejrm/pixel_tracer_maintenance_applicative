@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) {
         Boolean run = true;
         Scanner scanner = new Scanner(System.in);
-        PixelTracer pt = new PixelTracer(80, 40);
+        PixelTracer pt = new PixelTracer(80, 50);
         String response;
 
         while (run) {
