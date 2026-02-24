@@ -196,7 +196,7 @@ public class Curve extends Shape {
     @Override
     public String toString()
     {
-        return super.toString() + " CURVE" + points_toString();
+        return super.toString() + " CURVE " + points_toString();
     }
 
 

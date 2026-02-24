@@ -42,16 +42,6 @@ public class Point extends Shape {
         return new ArrayList<>(Arrays.asList(new Pixel(this.getPos_x(), this.getPos_y(), drawn_char)));
     }
 
-    @Override
-    public void translate(UUID id, int deltaX, int deltaY) {
-        this.pos_x += deltaX;
-        this.pos_y += deltaY;
-    }
-    
-    public void changeColor(String color) {
-        // TODO implement here
-    }
-
     //
     // Accessor methods
     //

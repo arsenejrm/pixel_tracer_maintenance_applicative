@@ -140,7 +140,7 @@ public class Circle extends Shape {
     @Override
     public String toString()
     {
-        return super.toString() + " CIRCLE " + this.center.getPos_x() + "" + this.center.getPos_y() + "" + this.radius;
+        return super.toString() + " CIRCLE " + this.center.getPos_x() + " " + this.center.getPos_y() + " " + this.radius;
     }
 
 

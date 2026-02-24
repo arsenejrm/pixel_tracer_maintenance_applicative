@@ -150,7 +150,7 @@ public ArrayList<Pixel> draw(char drawn_char) {
     @Override
     public String toString()
     {
-        return super.toString() + " LINE " + this.p1.getPos_x() + this.p1.getPos_y() + this.p2.getPos_x() + this.p2.getPos_y();
+        return super.toString() + " LINE " + this.p1.getPos_x() + " " + this.p1.getPos_y() + " " + this.p2.getPos_x() + " " + this.p2.getPos_y();
     }
 
 

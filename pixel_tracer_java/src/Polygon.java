@@ -88,7 +88,7 @@ public class Polygon extends Shape {
     @Override
     public String toString()
     {
-        return super.toString() + " POLYGON " + points.toString();
+        return super.toString() + " POLYGON " + points_toString();
     }
 
 

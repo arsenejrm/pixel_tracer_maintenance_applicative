@@ -80,6 +80,7 @@ public class PixelTracer {
     public String command_interpreter(String user_input) {
         String error_unknown = "commande inconnue\n";
         String error_empty = "commande manquante\n";
+        String error_used = "L'objet référencé est en cours d'utilisation\n";
         String error_param = "erreur paramètres, consulter la commande help\n";
         String action_completed = "done\n";
 
@@ -158,49 +159,6 @@ public class PixelTracer {
                     return error_param;
                 }
                 return "exit";
-            }
-
-            case "new" -> {
-                if (command_params.isEmpty()) {
-                    return error_param;
-                } else if (command_params.get(0).equals("area")) {
-                    this.current_area = new Area(this.width, this.height, UUID.randomUUID(), "area_name");
-                    this.list_areas.add(this.current_area);
-                }
-                return action_completed;
-            }
-
-            case "list" -> {
-                String info_list = "";
-                if (command_params.isEmpty()) {
-                    return error_param;
-                } else if (command_params.get(0).equals("areas")) {
-                    for (Area area : this.list_areas) {
-                        if (area == this.current_area) {
-                            info_list += " *   ";
-                        } else {
-                            info_list += " -   ";
-                        }
-                        info_list += area.toString() + "\n";
-                    }
-                } else if (command_params.get(0).equals("layers")) {
-                    for (Layer layer : this.current_area.getList_layers()) {
-                        if (layer == this.current_area.getCurrent_layer()) {
-                            info_list += " *   ";
-                        } else {
-                            info_list += " -   ";
-                        }
-                        info_list += layer.toString() + "\n";
-                    }
-                } else if (command_params.get(0).equals("shapes")) {
-                    for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
-                        info_list += " -   " + shape.toString() + "\n";
-                    }
-                } else {
-                    return error_param;
-                }
-                info_list += action_completed;
-                return info_list;
             }
 
             case "point" -> {
@@ -322,6 +280,122 @@ public class PixelTracer {
                 }
             }
 
+            case "list" -> {
+                String info_list = "";
+                if (command_params.isEmpty()) {
+                    return error_param;
+                } else if (command_params.get(0).equals("areas")) {
+                    for (Area area : this.list_areas) {
+                        if (area == this.current_area) {
+                            info_list += " *   ";
+                        } else {
+                            info_list += " -   ";
+                        }
+                        info_list += area.toString() + "\n";
+                    }
+                } else if (command_params.get(0).equals("layers")) {
+                    for (Layer layer : this.current_area.getList_layers()) {
+                        if (layer == this.current_area.getCurrent_layer()) {
+                            info_list += " *   ";
+                        } else {
+                            info_list += " -   ";
+                        }
+                        info_list += layer.toString() + "\n";
+                    }
+                } else if (command_params.get(0).equals("shapes")) {
+                    for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
+                        info_list += " -   " + shape.toString() + "\n";
+                    }
+                } else {
+                    return error_param;
+                }
+                info_list += action_completed;
+                return info_list;
+            }
+
+            case "new" -> {
+                if (command_params.isEmpty()) {
+                    return error_param;
+                } else if (command_params.get(0).equals("area")) {
+                    this.current_area = new Area(this.width, this.height, UUID.randomUUID(), "area_name");
+                    this.list_areas.add(this.current_area);
+                } else if (command_params.get(0).equals("layer")) {
+                    this.current_area.setCurrent_layer(new Layer());
+                    this.current_area.add_layer(this.current_area.getCurrent_layer());
+                }
+                return action_completed;
+            }
+
+            case "select" -> {
+                if (command_params.size() == 2) {
+                    if (command_params.get(0).equals("area")) {
+                        for (Area area : this.list_areas) {
+                            System.out.println(area.getId().toString());
+                            if (command_params.get(1).equals(area.getId().toString())) {
+                                setCurrent_area(area);
+                            }
+                        }
+                    } else if (command_params.get(0).equals("layer")) {
+                        for (Layer layer : this.current_area.getList_layers()) {
+                            System.out.println(command_params.get(1) + " " + layer.getId().toString());
+                            if (command_params.get(1).equals(layer.getId().toString())) {
+                                this.current_area.setCurrent_layer(layer);
+                            }
+                        }
+                    }
+                    return action_completed;
+                }
+            }
+
+            case "delete" -> {
+                if (command_params.size() == 2) {
+                    if (command_params.get(0).equals("area")) {
+                        if (this.current_area.getId().toString().equals(command_params.get(1))) {
+                            return error_used;
+                        }
+                        for (Area area : this.list_areas) {
+                            if (area.getId().toString().equals(command_params.get(1))) {
+                                this.list_areas.remove(area);
+                                return action_completed;
+                            }
+                        }
+                    } else if (command_params.get(0).equals("layer")) {
+                        if (this.current_area.getCurrent_layer().getId().toString().equals(command_params.get(1))) {
+                            return error_used;
+                        }
+                        for (Layer layer : this.current_area.getList_layers()) {
+                            if (layer.getId().toString().equals(command_params.get(1))) {
+                                this.current_area.getList_layers().remove(layer);
+                                return action_completed;
+                            }
+                        }
+                    } else if (command_params.get(0).equals("shape")) {
+                        for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
+                            if (shape.getId().toString().equals(command_params.get(1))) {
+                                this.current_area.getCurrent_layer().getList_shapes().remove(shape);
+                                return action_completed;
+                            }
+                        }
+                    }
+                }
+            }
+
+            case "set" -> {
+                if (command_params.size() == 3) {
+                    if (command_params.get(0).equals("char")) {
+                        if (command_params.get(1).equals("border")) {
+                            try {
+                                this.current_area.getCurrent_layer().setDrawn_char((char) Integer.parseInt(command_params.get(2)));
+                            } catch (NumberFormatException e) {return error_param;}
+                        } else if (command_params.get(1).equals("background")) {
+                            try {
+                                this.current_area.setEmpty_char((char) Integer.parseInt(command_params.get(2)));
+                            } catch (NumberFormatException e) {return error_param;}
+                        }
+                    }
+                }
+            }
+
             default -> {
                 return error_unknown;
             }
@@ -351,6 +425,6 @@ public class PixelTracer {
                 }
             }
         }
-        return "error : command inerpreter did not find any corresponding case";
+        return "error : command interpreter did not find any corresponding case";
     }
 }
