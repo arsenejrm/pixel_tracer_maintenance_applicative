@@ -2,36 +2,39 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Class Shape
+ * La classe abstraite Shape permet de réaliser toutes les formes disponibles dans le programme
  */
 public abstract class Shape {
 
-    //
-    // Fields
-    //
-
+    /**
+     * L'identifiant de la Shape
+     */
     private UUID id;
+    /**
+     * Indique si la Shape est remplie
+     */
     private boolean fill;
+    /**
+     * Taille du trait de la Shape
+     */
     private int thickness;
+    /**
+     * Direction dans laquelle la Shape est tournée
+     */
     private double rotation;
     
-    //
-    // Constructors
-    //
+
+    /**
+     * Le constructeur de la classe Shape permet d'instancier les propriétés de la Shape
+     * @param id 
+     */
     public Shape(int id) {
         this.id = UUID.randomUUID();
         this.fill = false;
         this.thickness = 1;
         this.rotation = 0.0;
     }
-    //
-    // Methods
-    //
 
-
-    //
-    // Accessor methods
-    //
 
     /**
      * Set the value of id
@@ -97,19 +100,26 @@ public abstract class Shape {
         return rotation;
     }
 
-    //
-    // Other methods
-    //
 
-
-    // Dessine la forme dans la grille
-    // Draw the shape in the grid
+    /**
+     * La méthode draw() est la méthode qui permet la conversion d'une Shape en liste de Pixel,
+     * pour ensuite disposer ces Pixel sur un Layer
+     * @param drawn_char Le caractère utilisé pour dessiner les Pixel
+     * @return Liste des Pixel correspondants
+     */
     public abstract ArrayList<Pixel> draw(char drawn_char);
 
-    public abstract void translate(String id, int dx, int dy);
+    /**
+     * La méthode translate() permet de bouger les coordonnées d'une Shape selon les 
+     * paramètres dx et dy, qu'ils soient positifs ou négatifs
+     * @param dx La valeur ajoutée à l'abscisse de la Shape
+     * @param dy La valeur ajoutée à l'ordonnée de la Shape
+     */
+    public abstract void translate(int dx, int dy);
 
 
     /**
+     * Renvoie l'identifiant de la Shape pour la commande list
      */
     @Override
     public String toString() {

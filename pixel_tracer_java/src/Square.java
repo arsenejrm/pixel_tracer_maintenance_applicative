@@ -3,39 +3,35 @@ import java.util.*;
 
 
 /**
- * Class Square
+ * La classe Square permet de définir un carré à partir d'un point et d'une longueur de côté.
  */
 public class Square extends Shape {
 
-    //
-    // Fields
-    //
-
+    /**
+     * La longueur du côté du Square
+     */
     private int lenght;
+    /**
+     * le Point en haut à gauche du Square
+     */
     private Point p1;
     
-    //
-    // Constructors
-    //
-    public Square () {
-        super(0);
-     };
 
+    /**
+     * Ce constructeur permet de définir un Square à partir d'un Point et de la longueur de ses côtés.
+     * @param lenght La longueur des côtés du Square
+     * @param p1 Le Point en haut à gauche du Square
+     */
     public Square (int lenght, Point p1) {
         super(0);
         this.lenght = lenght;
         this.p1 = p1;
-     };
-    
-    public Square(int id, int lenght, Point p1) {
-        super(id);
-        this.lenght = lenght;
-        this.p1 = p1;
-     }
+    };
      
-    //
-    // Methods
-    //
+
+    /**
+     * Cette implémentation de la méthode draw() renvoie les Pixel des Line qui forment le Square
+     */
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
 
@@ -77,26 +73,24 @@ public class Square extends Shape {
         return pixels;
     }
 
-
+    /**
+     * Cette implémentation de la méthode translate() change les coordonnées du Point initial du Square
+     * selon les paralètres delta des abscisses et ordonnées, qu'ils soient positif ou négatif
+     */
     @Override
-    public void translate(String id, int deltaX, int deltaY) {
+    public void translate(int deltaX, int deltaY) {
         p1.setPos_x(p1.getPos_x() + deltaX);
         p1.setPos_y(p1.getPos_y() + deltaY);
     }
-
 
      public void changeColor(String color) {
         // TODO implement here
     }
 
-
      public void resize(double factor) {
         // TODO implement here
     }
 
-    //
-    // Accessor methods
-    //
 
     /**
      * Set the value of lenght
@@ -130,11 +124,9 @@ public class Square extends Shape {
         return p1;
     }
 
-    //
-    // Other methods
-    //
 
     /**
+     * Renvoie la classe du Square ainsi que ses coordonnées et autres paramètres pour la commande list
      */
     @Override
     public String toString()

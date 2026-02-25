@@ -5,38 +5,37 @@ import java.util.ArrayList;
  */
 public class Rectangle extends Shape {
 
-    //
-    // Fields
-    //
-
+    /**
+     * La valeur e hauteur du Rectangle
+     */
     private int height;
+    /**
+     * La valeur de longueur du Rectangle
+     */
     private int width;
+    /**
+     * Le Point en haut à gauche du Rectangle
+     */
     private Point p1;
     
-    //
-    // Constructors
-    //
-    public Rectangle () {
-        super(0);
-     };
-
+    
+    /**
+     * Ce constructeur permet de définir un Rectangle à partir du Point en haut à gauche, de sa hauteur et de sa largeur
+     * @param height La hauteur du Rectangle
+     * @param width La longueur du Rectangle
+     * @param p1 le Point en haut à gauche du Rectangle
+     */
     public Rectangle (int height, int width, Point p1) {
         super(0);
         this.height = height;
         this.width = width;
         this.p1 = p1;
-     };
-     
-    public Rectangle(int id, int height, int width, Point p1) {
-        super(id);
-        this.height = height;
-        this.width = width;
-        this.p1 = p1;
-     }
-     
-    //
-    // Methods
-    //
+    };
+
+
+    /**
+     * Cette implémentation de la méthode draw() renvoie la liste des Pixel dessinant le Rectangle
+     */
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
 
@@ -80,12 +79,15 @@ public class Rectangle extends Shape {
         return pixels;
     }
 
+    /**
+     * Cette implémentation de la méthode translate() déplace le Point du Rectangle 
+     * selon les paramètres delta des abscisses et des ordonnées, qu'ils soient positifs ou négatifs
+     */
     @Override
-    public void translate(String id, int deltaX, int deltaY) {
+    public void translate(int deltaX, int deltaY) {
         p1.setPos_x(p1.getPos_x() + deltaX);
         p1.setPos_y(p1.getPos_y() + deltaY);
     }
-
     
     public void changeColor(String color) {
         // TODO implement here
@@ -96,19 +98,14 @@ public class Rectangle extends Shape {
         width = (int)(width * factor);
     }
 
-     public void fill(String color) {
-         // Fill logic
-     }
+    public void fill(String color) {
+        // Fill logic
+    }
 
-     public void unfill() {
-         // Unfill logic
-     }
+    public void unfill() {
+        // Unfill logic
+    }
 
-    
-
-    //
-    // Accessor methods
-    //
 
     /**
      * Set the value of height
@@ -158,16 +155,13 @@ public class Rectangle extends Shape {
         return this.p1;
     }
 
-    //
-    // Other methods
-    //
 
     /**
+     * Renvoie la classe ainsi que les coordonnées et paramètres de l'objet Rectangle
      */
+    @Override
     public String toString()
     {
         return super.toString() + " RECTANGLE " + this.p1.getPos_x() + " " + this.p1.getPos_y() + " " + this.width + " " + this.height;
     }
-
-
 }

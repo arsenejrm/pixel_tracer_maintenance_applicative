@@ -3,39 +3,34 @@ import java.util.*;
 
 
 /**
- * Class Circle
+ * La classe Circle dessine un cercle à partir d'un Point qui représente le centre et d'un rayon du cercle
  */
 public class Circle extends Shape {
 
-    //
-    // Fields
-    //
-
+    /**
+     * Le rayon du Circle
+     */
     private int radius;
+    /**
+     * Le Point  représentant le centre du Circle
+     */
     private Point center;
     
-    //
-    // Constructors
-    //
-    public Circle () {
-        super(0);
-     };
+
+    /**
+     * Ce constructeur permet de définir un Circle à partir d'un Point représentant le centre et le rayon
+     */
     public Circle(int radius, Point center) {
         super(0);
         this.radius = radius;
         this.center = center;
-     };
+    };
 
-    public Circle(int id, int radius, Point center) {
-        super(id);
-        this.radius = radius;
-        this.center = center;
-     }
-     
-    //
-    // Methods
-    //
 
+    /**
+     * Cette implémentation de la méthode draw() renvoie tous les Pixel correspondant au dessin du Circle
+     */
+    @Override
     public ArrayList<Pixel> draw(char drawn_char) {
                 int x = 0;
         int y = this.getRadius();
@@ -70,19 +65,15 @@ public class Circle extends Shape {
         return pixels_list;
     }
 
+    /**
+     * Cette implémentation de la classe translate() permet de déplacer le Point du centre du Circle
+     * selon les paramètres delta des abscisses et ordonnées, qu'ils soient positifs ou négatifs
+     */
     @Override  
-    public void translate(String id, int deltaX, int deltaY) {
+    public void translate(int deltaX, int deltaY) {
         this.center.setPos_x(this.center.getPos_x() + deltaX);
         this.center.setPos_y(this.center.getPos_y() + deltaY);
     }
-
-
-
-    /**
-     * Scales the circle by the given factor.
-     * @param factor The factor to scale by.
-     */
-
 
     public void changeColor(String color) {
         // TODO implement here
@@ -92,11 +83,6 @@ public class Circle extends Shape {
         // TODO implement here
     }
 
-
-
-    //
-    // Accessor methods
-    //
 
     /**
      * Set the value of radius
@@ -130,11 +116,9 @@ public class Circle extends Shape {
         return center;
     }
 
-    //
-    // Other methods
-    //
 
     /**
+     * Renvoie la classe ainsi que le Point et les paramètres correspondants pour la commande list
      */
     @Override
     public String toString()
