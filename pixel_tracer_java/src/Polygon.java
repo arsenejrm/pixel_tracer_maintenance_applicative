@@ -4,13 +4,14 @@ import java.util.*;
 /**
  * Class Polygon
  */
-public class Polygon extends Shape {
+public class Polygon extends Shape implements Fillable {
 
     //
     // Fields
     //
 
     private ArrayList<Point> points;
+    private char fillChar = ' ';
 
     //
     // Constructors
@@ -51,6 +52,15 @@ public class Polygon extends Shape {
         }
     }
 
+    @Override
+    public void setFillChar(char c) {
+        this.fillChar = c;
+    }
+
+    @Override
+    public char getFillChar() {
+        return fillChar;
+    }
 
 
     

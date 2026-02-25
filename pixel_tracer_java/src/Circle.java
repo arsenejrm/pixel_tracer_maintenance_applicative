@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class Circle
  */
-public class Circle extends Shape {
+public class Circle extends Shape implements Fillable {
 
     //
     // Fields
@@ -13,6 +13,7 @@ public class Circle extends Shape {
 
     private int radius;
     private Point center;
+    private char fillChar = ' ';
     
     //
     // Constructors
@@ -76,6 +77,16 @@ public class Circle extends Shape {
         this.center.setPos_y(this.center.getPos_y() + deltaY);
     }
 
+
+        @Override
+    public void setFillChar(char c) {
+        this.fillChar = c;
+    }
+
+    @Override
+    public char getFillChar() {
+        return fillChar;
+    }
 
 
     /**

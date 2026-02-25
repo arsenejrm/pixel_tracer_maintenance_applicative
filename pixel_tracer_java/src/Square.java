@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Class Square
  */
-public class Square extends Shape {
+public class Square extends Shape implements Fillable {
 
     //
     // Fields
@@ -13,6 +13,7 @@ public class Square extends Shape {
 
     private int lenght;
     private Point p1;
+    private char fillChar = ' ';
     
     //
     // Constructors
@@ -82,6 +83,16 @@ public class Square extends Shape {
     public void translate(String id, int deltaX, int deltaY) {
         p1.setPos_x(p1.getPos_x() + deltaX);
         p1.setPos_y(p1.getPos_y() + deltaY);
+    }
+
+    @Override
+    public void setFillChar(char c) {
+        this.fillChar = c;
+    }
+
+    @Override
+    public char getFillChar() {
+        return fillChar;
     }
 
 

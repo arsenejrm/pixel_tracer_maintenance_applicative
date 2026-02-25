@@ -443,6 +443,36 @@ public class PixelTracer {
                     return error_param;
                 }
             }
+            case "fill" -> {
+                if (command_params.size() == 2) {
+
+                    String id = command_params.get(0);
+
+                    if (command_params.get(1).length() != 1) {
+                        return error_param;
+                    }
+
+                    char fillChar = command_params.get(1).charAt(0);
+
+                    Shape shape = this.current_area
+                            .getCurrent_layer()
+                            .getShapeById(id);
+
+                    if (shape == null) {
+                        return "shape not found\n";
+                    }
+
+                    if (shape instanceof Fillable fillableShape) {
+                        fillableShape.setFillChar(fillChar);
+                        return command_interpreter("plot");
+                    } else {
+                        return "This shape cannot be filled\n";
+                    }
+
+                } else {
+                    return error_param;
+                }
+            }
         }
         return "error : command interpreter did not find any corresponding case";
     }

@@ -58,7 +58,7 @@ public class Layer {
                 return shape;
             }
         }
-        return null;
+    return null;
 }
 
     /**

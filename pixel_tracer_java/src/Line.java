@@ -91,7 +91,7 @@ public ArrayList<Pixel> draw(char drawn_char) {
      }
 
 
-    public void rotate(double angle) {
+    public void rotate(String id, double angle) {
         // TODO implement here
     }   
 
