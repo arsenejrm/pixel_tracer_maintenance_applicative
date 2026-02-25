@@ -125,7 +125,7 @@ public class PixelTracer {
                     \tdelete {area, layer, shape} {id}\r
                     \tnew {area, layer}\r
                     \t==== Set ====\r
-                    \tset char {border, background} ascii_code\r
+                    \tset char {border, background} character : set character\r
                     \tset layer {visible, unvisible} {id}
                     \t==== Bonus ====\r
                     \ttranslate id dx dy : move shape\r
@@ -390,12 +390,12 @@ public class PixelTracer {
                     if (command_params.get(0).equals("char")) {
                         if (command_params.get(1).equals("border")) {
                             try {
-                                this.current_area.getCurrent_layer().setDrawn_char((char) Integer.parseInt(command_params.get(2)));
+                                this.current_area.getCurrent_layer().setDrawn_char(command_params.get(2).charAt(0));
                                 return command_interpreter("plot");
                             } catch (NumberFormatException e) {return error_param;}
                         } else if (command_params.get(1).equals("background")) {
                             try {
-                                this.current_area.setEmpty_char((char) Integer.parseInt(command_params.get(2)));
+                                this.current_area.setEmpty_char(command_params.get(2).charAt(0));
                                 return command_interpreter("plot");
                             } catch (NumberFormatException e) {return error_param;}
                         }
