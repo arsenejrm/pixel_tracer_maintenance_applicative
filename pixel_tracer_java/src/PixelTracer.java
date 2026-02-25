@@ -386,11 +386,25 @@ public class PixelTracer {
                         if (command_params.get(1).equals("border")) {
                             try {
                                 this.current_area.getCurrent_layer().setDrawn_char((char) Integer.parseInt(command_params.get(2)));
+                                return command_interpreter("plot");
                             } catch (NumberFormatException e) {return error_param;}
                         } else if (command_params.get(1).equals("background")) {
                             try {
                                 this.current_area.setEmpty_char((char) Integer.parseInt(command_params.get(2)));
+                                return command_interpreter("plot");
                             } catch (NumberFormatException e) {return error_param;}
+                        }
+                    } else if (command_params.get(0).equals("layer")) {
+                        for (Layer layer : this.current_area.getList_layers()) {
+                            if (layer.getId().toString().equals(command_params.get(2))) {
+                                if (command_params.get(1).equals("visible")) {
+                                    layer.set_visibility(true);
+                                    return command_interpreter("plot");
+                                } else if (command_params.get(1).equals("unvisible")) {
+                                    layer.set_visibility(false);
+                                    return command_interpreter("plot");
+                                }
+                            }
                         }
                     }
                 }
@@ -399,6 +413,7 @@ public class PixelTracer {
             default -> {
                 return error_unknown;
             }
+
             case "translate" -> {
                 if (command_params.size() == 3) {
                     try {

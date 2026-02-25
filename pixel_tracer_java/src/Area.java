@@ -40,6 +40,7 @@ public class Area {
     }
 
     public void update_pixel_map() {
+        create_pixel_map();
         for (Layer layer : list_layers) {
             if (layer.getVisible()) {
                 ArrayList<Pixel> pixels_list = layer.draw();
@@ -149,7 +150,7 @@ public class Area {
      * Set the value of empty_char
      * @param newVar the new value of empty_char
      */
-    public void setEmpty_char (Character par_empty_char) {
+    public void setEmpty_char (char par_empty_char) {
         this.empty_char = par_empty_char;
     }
 
