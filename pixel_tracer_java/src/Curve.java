@@ -55,6 +55,10 @@ public class Curve extends Shape {
         this.controlPoints = new ArrayList<>(points);
     }
 
+    /**
+     * Dessine une courbe
+     * @param drawn_char
+     */
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
 
@@ -84,6 +88,12 @@ public class Curve extends Shape {
         return pixels;
     }
 
+    /**
+     * Déplace la courbe selon les paramètres delta des abscisses et des ordonnées, qu'ils soient positifs ou négatifs
+     * @param deltaX
+     * @param deltaY
+     * @return
+     */
     @Override
     public void translate(int deltaX, int deltaY) {
         for (Point p : controlPoints) {
@@ -92,6 +102,13 @@ public class Curve extends Shape {
         }
     }
 
+    /**
+     * Dessine un segment
+     * @param a
+     * @param b
+     * @param c
+     * @return
+     */
     private ArrayList<Pixel> drawSegment(Pixel a, Pixel b, char c) {
 
     ArrayList<Pixel> pixels = new ArrayList<>();
@@ -119,6 +136,7 @@ public class Curve extends Shape {
 }
     
     /**
+     * Calcule la mediane de deux points
      * @return       Point
      * @param        p1
      * @param        p2
@@ -130,6 +148,13 @@ public class Curve extends Shape {
         return new Point((int)Math.round(x), (int)Math.round(y));
     }
 
+    /**
+     * Calcule la courbe de Bezier grâce à casteljau
+     * @return       ArrayList<Point>
+     * @param        points
+     * @param        num_pt
+     * @param        t
+     */
     public ArrayList<Point> cj_calc(ArrayList<Point> points, int num_pt, double t) {
         ArrayList<Point> tmp_points = new ArrayList<>();
         for (int i = 0; i < num_pt; i++) {
@@ -186,6 +211,10 @@ public class Curve extends Shape {
     // Other methods
     //
 
+    /**
+     * toString convert points to string
+     * @return
+     */
     public String points_toString() {
         String str_out = "";
         for (Point point : this.controlPoints) {
@@ -196,6 +225,7 @@ public class Curve extends Shape {
 
 
     /**
+     * Renvoie la classe de la Line et les coordonnées de ses points pour la commande list
      */
     @Override
     public String toString()
