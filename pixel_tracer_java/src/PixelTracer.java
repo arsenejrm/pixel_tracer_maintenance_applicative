@@ -417,7 +417,7 @@ public class PixelTracer {
             case "translate" -> {
                 if (command_params.size() == 3) {
                     try {
-                        UUID id = UUID.fromString(command_params.get(0));
+                        String id = command_params.get(0);
                         int dx = Integer.parseInt(command_params.get(1));
                         int dy = Integer.parseInt(command_params.get(2));
 

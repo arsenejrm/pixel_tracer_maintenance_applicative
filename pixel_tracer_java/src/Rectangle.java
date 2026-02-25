@@ -80,13 +80,12 @@ public class Rectangle extends Shape {
         return pixels;
     }
 
+    @Override
+    public void translate(String id, int deltaX, int deltaY) {
+        p1.setPos_x(p1.getPos_x() + deltaX);
+        p1.setPos_y(p1.getPos_y() + deltaY);
+    }
 
-    public void translate(int deltaX, int deltaY) {
-         if (p1 != null) {
-             p1.setPos_x(p1.getPos_x() + deltaX);
-             p1.setPos_y(p1.getPos_y() + deltaY);
-         }
-     }
     
     public void changeColor(String color) {
         // TODO implement here
@@ -95,12 +94,6 @@ public class Rectangle extends Shape {
     public void resize(double factor) {
         height = (int)(height * factor);
         width = (int)(width * factor);
-    }
-
-
-
-    public void changeColor(String color) {
-        // Color change logic
     }
 
     public void changeThickness(int thickness) {

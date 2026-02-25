@@ -84,6 +84,14 @@ public class Curve extends Shape {
         return pixels;
     }
 
+    @Override
+        public void translate(String id, int deltaX, int deltaY) {
+            for (Point p : controlPoints) {
+                p.setPos_x(p.getPos_x() + deltaX);
+                p.setPos_y(p.getPos_y() + deltaY);
+            }
+        }
+
     private ArrayList<Pixel> drawSegment(Pixel a, Pixel b, char c) {
 
     ArrayList<Pixel> pixels = new ArrayList<>();

@@ -42,6 +42,13 @@ public class Point extends Shape {
         return new ArrayList<>(Arrays.asList(new Pixel(this.getPos_x(), this.getPos_y(), drawn_char)));
     }
 
+    @Override
+    public void translate(String id, int deltaX, int deltaY) {
+            this.setPos_x(this.getPos_x() + deltaX);
+            this.setPos_y(this.getPos_y() + deltaY);
+    }
+
+
     //
     // Accessor methods
     //

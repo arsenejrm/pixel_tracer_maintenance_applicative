@@ -70,19 +70,18 @@ public class Circle extends Shape {
         return pixels_list;
     }
 
-    public void translate(int x, int y) {
-        center.setPos_x(center.getPos_x() + x);
-        center.setPos_y(center.getPos_y() + y);
+    @Override  
+    public void translate(String id, int deltaX, int deltaY) {
+        this.center.setPos_x(this.center.getPos_x() + deltaX);
+        this.center.setPos_y(this.center.getPos_y() + deltaY);
     }
 
 
-/*************  ✨ Windsurf Command ⭐  *************/
 
     /**
      * Scales the circle by the given factor.
      * @param factor The factor to scale by.
      */
-/*******  e4c04feb-7840-41d8-a4c4-9a9fd08dce7e  *******/
 
 
     public void changeColor(String color) {

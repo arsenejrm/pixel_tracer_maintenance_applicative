@@ -44,12 +44,13 @@ public class Polygon extends Shape {
         return pixels_list;
     }
 
-    public void translate(int x, int y) {
+    @Override
+    public void translate(String id, int deltaX, int deltaY) {
         for (Point p : points) {
-            p.setPos_x(p.getPos_x() + x);
-            p.setPos_y(p.getPos_y() + y);
+            p.translate(id, deltaX, deltaY);
         }
     }
+
 
 
     

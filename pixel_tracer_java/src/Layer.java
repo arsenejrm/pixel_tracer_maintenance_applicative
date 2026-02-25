@@ -52,13 +52,13 @@ public class Layer {
         return this.id;
     }
 
-    public Shape getShapeById(UUID id) {
-    for (Shape shape : this.list_shapes) {
-        if (shape.getId() == id) {
-            return shape;
+    public Shape getShapeById(String id) {
+        for (Shape shape : this.list_shapes) {
+            if (shape.getId().toString().equals(id)) {
+                return shape;
+            }
         }
-    }
-    return null;
+        return null;
 }
 
     /**
