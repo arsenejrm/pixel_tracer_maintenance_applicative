@@ -47,13 +47,13 @@ public class Curve extends Shape {
     // Methods
     //
     private void setControlPoints(List<Point> points) {
-    if (points.size() < 3) {
-        throw new IllegalArgumentException(
-            "Une courbe doit avoir au minimum 3 points"
-        );
+        if (points.size() < 3) {
+            throw new IllegalArgumentException(
+                "Une courbe doit avoir au minimum 3 points"
+            );
+        }
+        this.controlPoints = new ArrayList<>(points);
     }
-    this.controlPoints = new ArrayList<>(points);
-}
 
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
@@ -85,12 +85,12 @@ public class Curve extends Shape {
     }
 
     @Override
-        public void translate(String id, int deltaX, int deltaY) {
-            for (Point p : controlPoints) {
-                p.setPos_x(p.getPos_x() + deltaX);
-                p.setPos_y(p.getPos_y() + deltaY);
-            }
+    public void translate(int deltaX, int deltaY) {
+        for (Point p : controlPoints) {
+            p.setPos_x(p.getPos_x() + deltaX);
+            p.setPos_y(p.getPos_y() + deltaY);
         }
+    }
 
     private ArrayList<Pixel> drawSegment(Pixel a, Pixel b, char c) {
 
@@ -143,10 +143,6 @@ public class Curve extends Shape {
             tmp_points = new_points;
         }
         return tmp_points;
-    }
-    
-    public void translate(int x, int y) {
-        // TODO implement here
     }
     
     public void rotate(double angle) {

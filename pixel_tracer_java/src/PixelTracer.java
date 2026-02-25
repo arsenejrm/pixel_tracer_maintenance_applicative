@@ -434,7 +434,7 @@ public class PixelTracer {
                             return "shape not found\n";
                         }
 
-                        shape.translate(id, dx, dy);
+                        shape.translate(dx, dy);
                         return command_interpreter("plot");
 
                     } catch (NumberFormatException e) {

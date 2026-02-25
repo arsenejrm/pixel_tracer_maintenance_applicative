@@ -97,9 +97,9 @@ public class Polygon extends Shape implements Fillable {
     }
 
     @Override
-    public void translate(String id, int deltaX, int deltaY) {
+    public void translate(int deltaX, int deltaY) {
         for (Point p : points) {
-            p.translate(id, deltaX, deltaY);
+            p.translate(deltaX, deltaY);
         }
     }
 

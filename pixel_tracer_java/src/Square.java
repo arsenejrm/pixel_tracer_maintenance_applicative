@@ -15,6 +15,7 @@ public class Square extends Shape implements Fillable {
      * le Point en haut à gauche du Square
      */
     private Point p1;
+    private char fillChar = ' ';
     
 
     /**
@@ -60,10 +61,10 @@ public class Square extends Shape implements Fillable {
         pixels.addAll(left.draw(drawn_char));
 
         // Si on veut un carré rempli
-        if (fillChar != ' ') {
+        if (this.fillChar != ' ') {
             for (int i = 1; i < lenght - 1; i++) {
                 for (int j = 1; j < lenght - 1; j++) {
-                    pixels.add(new Pixel(x + i, y + j, fillChar));
+                    pixels.add(new Pixel(x + i, y + j, this.fillChar));
                 }
             }
         }
