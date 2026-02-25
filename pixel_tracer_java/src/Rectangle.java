@@ -96,10 +96,6 @@ public class Rectangle extends Shape {
         width = (int)(width * factor);
     }
 
-    public void changeThickness(int thickness) {
-        // Thickness change logic
-    }
-
      public void fill(String color) {
          // Fill logic
      }
@@ -107,14 +103,6 @@ public class Rectangle extends Shape {
      public void unfill() {
          // Unfill logic
      }
-
-     public void delete() {
-         // Delete logic
-     }
-
-    public void duplicate() {
-        // Duplicate logic
-    }
 
     
 

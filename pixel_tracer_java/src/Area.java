@@ -28,6 +28,7 @@ public class Area {
         create_pixel_map();
     };
 
+
     private void create_pixel_map() {
         this.pixel_map = new ArrayList<>();
         for (int i = 0; i < height; i++) {

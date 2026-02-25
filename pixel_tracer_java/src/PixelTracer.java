@@ -127,6 +127,10 @@ public class PixelTracer {
                     \t==== Set ====\r
                     \tset char {border, background} ascii_code\r
                     \tset layer {visible, unvisible} {id}
+                    \t==== Bonus ====\r
+                    \ttranslate id dx dy : move shape\r
+                    \trotate id angle : rotate shape (only for line, polygon, curve)\r
+                    \tfill id char : fill shape (except line, point, curve)\r
                 """;
             }
 

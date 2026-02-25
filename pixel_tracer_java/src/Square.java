@@ -94,23 +94,6 @@ public class Square extends Shape {
         // TODO implement here
     }
 
-     public boolean isSquare() {
-        return true;
-    }
-
-     public boolean isRectangle() {
-        return false;
-    }
-
-     public boolean isCircle() {
-        return false;
-    }
-
-     public boolean isPolygon() {
-        return false;
-    }
-
-
     //
     // Accessor methods
     //
