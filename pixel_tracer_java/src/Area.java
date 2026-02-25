@@ -52,7 +52,7 @@ public class Area {
 
                     // Vérifier qu'on est dans les limites
                     if (x >= 0 && x < width && y >= 0 && y < height) {
-                        this.pixel_map.get(y).set(x, layer.getDrawn_char());
+                        this.pixel_map.get(y).set(x, px.getColor_char());
                     }
                 }
             }

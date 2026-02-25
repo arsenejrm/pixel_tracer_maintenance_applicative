@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * La classe Square permet de définir un carré à partir d'un point et d'une longueur de côté.
  */
-public class Square extends Shape {
+public class Square extends Shape implements Fillable {
 
     /**
      * La longueur du côté du Square
@@ -59,17 +59,15 @@ public class Square extends Shape {
         pixels.addAll(bottom.draw(drawn_char));
         pixels.addAll(left.draw(drawn_char));
 
-        // Si on veut un carré rempli (à finir d'implementer)
-        if (getFill()) {
-            for (int i = y + 1; i < y + lenght - 1; i++) {
-                Line fillLine = new Line(
-                        new Point(x + 1, i),
-                        new Point(x + lenght - 2, i)
-                );
-                pixels.addAll(fillLine.draw(drawn_char));
+        // Si on veut un carré rempli
+        if (fillChar != ' ') {
+            for (int i = 1; i < lenght - 1; i++) {
+                for (int j = 1; j < lenght - 1; j++) {
+                    pixels.add(new Pixel(x + i, y + j, fillChar));
+                }
             }
         }
-
+        
         return pixels;
     }
 
@@ -82,6 +80,17 @@ public class Square extends Shape {
         p1.setPos_x(p1.getPos_x() + deltaX);
         p1.setPos_y(p1.getPos_y() + deltaY);
     }
+
+    @Override
+    public void setFillChar(char c) {
+        this.fillChar = c;
+    }
+
+    @Override
+    public char getFillChar() {
+        return fillChar;
+    }
+
 
      public void changeColor(String color) {
         // TODO implement here

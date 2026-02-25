@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * La classe Circle dessine un cercle à partir d'un Point qui représente le centre et d'un rayon du cercle
  */
-public class Circle extends Shape {
+public class Circle extends Shape implements Fillable {
 
     /**
      * Le rayon du Circle
@@ -15,6 +15,7 @@ public class Circle extends Shape {
      * Le Point  représentant le centre du Circle
      */
     private Point center;
+    private char fillChar = ' ';
     
 
     /**
@@ -62,6 +63,35 @@ public class Circle extends Shape {
                 x++;
             }
         }
+            if (fillChar != ' ') {
+                int cx = this.getCenter().getPos_x();
+                int cy = this.getCenter().getPos_y();
+                int r = this.getRadius();
+
+                for (int i = cx - r; i <= cx + r; i++) {
+                    for (int j = cy - r; j <= cy + r; j++) {
+
+                        int dx = i - cx;
+                        int dy = j - cy;
+
+                        if (dx * dx + dy * dy <= r * r) {
+
+                            boolean isContour = false;
+
+                            for (Pixel p : pixels_list) {
+                                if (p.getX() == i && p.getY() == j) {
+                                    isContour = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isContour) {
+                                pixels_list.add(new Pixel(i, j, fillChar));
+                            }
+                        }
+                    }
+                }
+            }
         return pixels_list;
     }
 
@@ -74,6 +104,24 @@ public class Circle extends Shape {
         this.center.setPos_x(this.center.getPos_x() + deltaX);
         this.center.setPos_y(this.center.getPos_y() + deltaY);
     }
+
+
+        @Override
+    public void setFillChar(char c) {
+        this.fillChar = c;
+    }
+
+    @Override
+    public char getFillChar() {
+        return fillChar;
+    }
+
+
+    /**
+     * Scales the circle by the given factor.
+     * @param factor The factor to scale by.
+     */
+
 
     public void changeColor(String color) {
         // TODO implement here

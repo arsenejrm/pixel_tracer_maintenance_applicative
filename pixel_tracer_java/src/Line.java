@@ -94,7 +94,7 @@ public class Line extends Shape {
         
     }
 
-    public void rotate(double angle) {
+    public void rotate(String id, double angle) {
         // TODO implement here
     }   
     

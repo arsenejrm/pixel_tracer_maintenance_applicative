@@ -1,6 +1,15 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
+
+interface Fillable {
+    void setFillChar(char c);
+    char getFillChar();
+}
+interface Rotatable {
+    void rotate(double angle);
+}
+
 /**
  * La classe abstraite Shape permet de réaliser toutes les formes disponibles dans le programme
  */
@@ -15,10 +24,6 @@ public abstract class Shape {
      */
     private boolean fill;
     /**
-     * Taille du trait de la Shape
-     */
-    private int thickness;
-    /**
      * Direction dans laquelle la Shape est tournée
      */
     private double rotation;
@@ -31,7 +36,6 @@ public abstract class Shape {
     public Shape(int id) {
         this.id = UUID.randomUUID();
         this.fill = false;
-        this.thickness = 1;
         this.rotation = 0.0;
     }
 
@@ -66,22 +70,6 @@ public abstract class Shape {
      */
     public boolean getFill () {
         return fill;
-    }
-
-    /**
-     * Set the value of thickness
-     * @param newVar the new value of thickness
-     */
-    public void setThickness (int newVar) {
-        thickness = newVar;
-    }
-
-    /**
-     * Get the value of thickness
-     * @return the value of thickness
-     */
-    public int getThickness () {
-        return thickness;
     }
 
     /**

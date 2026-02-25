@@ -125,14 +125,15 @@ public class PixelTracer {
                     \tdelete {area, layer, shape} {id}\r
                     \tnew {area, layer}\r
                     \t==== Set ====\r
-                    \tset char {border, background} ascii_code\r
+                    \tset char {border, background} character : set character\r
                     \tset layer {visible, unvisible} {id}
                     \t==== Bonus ====\r
                     \ttranslate id dx dy : move shape\r
-                    \trotate id angle : rotate shape (only for line, polygon, curve)\r
                     \tfill id char : fill shape (except line, point, curve)\r
                 """;
             }
+
+            //                     \trotate id angle : rotate shape (only for line, polygon, curve)\r
 
             case "plot" -> {
                 if (!command_params.isEmpty()) {
@@ -389,12 +390,12 @@ public class PixelTracer {
                     if (command_params.get(0).equals("char")) {
                         if (command_params.get(1).equals("border")) {
                             try {
-                                this.current_area.getCurrent_layer().setDrawn_char((char) Integer.parseInt(command_params.get(2)));
+                                this.current_area.getCurrent_layer().setDrawn_char(command_params.get(2).charAt(0));
                                 return command_interpreter("plot");
                             } catch (NumberFormatException e) {return error_param;}
                         } else if (command_params.get(1).equals("background")) {
                             try {
-                                this.current_area.setEmpty_char((char) Integer.parseInt(command_params.get(2)));
+                                this.current_area.setEmpty_char(command_params.get(2).charAt(0));
                                 return command_interpreter("plot");
                             } catch (NumberFormatException e) {return error_param;}
                         }
@@ -439,6 +440,36 @@ public class PixelTracer {
                     } catch (NumberFormatException e) {
                         return error_param;
                     }
+                } else {
+                    return error_param;
+                }
+            }
+            case "fill" -> {
+                if (command_params.size() == 2) {
+
+                    String id = command_params.get(0);
+
+                    if (command_params.get(1).length() != 1) {
+                        return error_param;
+                    }
+
+                    char fillChar = command_params.get(1).charAt(0);
+
+                    Shape shape = this.current_area
+                            .getCurrent_layer()
+                            .getShapeById(id);
+
+                    if (shape == null) {
+                        return "shape not found\n";
+                    }
+
+                    if (shape instanceof Fillable fillableShape) {
+                        fillableShape.setFillChar(fillChar);
+                        return command_interpreter("plot");
+                    } else {
+                        return "This shape cannot be filled\n";
+                    }
+
                 } else {
                     return error_param;
                 }

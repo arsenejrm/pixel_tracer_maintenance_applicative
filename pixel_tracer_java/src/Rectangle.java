@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Class Rectangle
  */
-public class Rectangle extends Shape {
+public class Rectangle extends Shape implements Fillable {
 
     /**
      * La valeur e hauteur du Rectangle
@@ -17,7 +17,8 @@ public class Rectangle extends Shape {
      * Le Point en haut à gauche du Rectangle
      */
     private Point p1;
-    
+    private char fillChar = ' ';
+
     
     /**
      * Ce constructeur permet de définir un Rectangle à partir du Point en haut à gauche, de sa hauteur et de sa largeur
@@ -65,14 +66,12 @@ public class Rectangle extends Shape {
         pixels.addAll(bottom.draw(drawn_char));
         pixels.addAll(left.draw(drawn_char));
 
-        // Remplissage si activé
-        if (getFill()) {
+        // Remplissage si fillChar défini
+        if (fillChar != ' ') {
             for (int i = y + 1; i < y + height - 1; i++) {
-                Line fillLine = new Line(
-                        new Point(x + 1, i),
-                        new Point(x + width - 2, i)
-                );
-                pixels.addAll(fillLine.draw(drawn_char));
+                for (int j = x + 1; j < x + width - 1; j++) {
+                    pixels.add(new Pixel(j, i, fillChar));
+                }
             }
         }
 
@@ -98,12 +97,14 @@ public class Rectangle extends Shape {
         width = (int)(width * factor);
     }
 
-    public void fill(String color) {
-        // Fill logic
+    @Override
+    public void setFillChar(char c) {
+        this.fillChar = c;
     }
 
-    public void unfill() {
-        // Unfill logic
+    @Override
+    public char getFillChar() {
+        return fillChar;
     }
 
 
