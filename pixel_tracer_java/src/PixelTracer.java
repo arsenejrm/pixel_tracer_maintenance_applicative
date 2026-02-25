@@ -129,10 +129,11 @@ public class PixelTracer {
                     \tset layer {visible, unvisible} {id}
                     \t==== Bonus ====\r
                     \ttranslate id dx dy : move shape\r
-                    \trotate id angle : rotate shape (only for line, polygon, curve)\r
                     \tfill id char : fill shape (except line, point, curve)\r
                 """;
             }
+
+            //                     \trotate id angle : rotate shape (only for line, polygon, curve)\r
 
             case "plot" -> {
                 if (!command_params.isEmpty()) {

@@ -59,7 +59,7 @@ public class Pixel {
      * Détermine le caracère utilisé pour dessiner ce pixel
      * @param par_color_char Le caractère utilisé
      */
-    public void setChar (Character par_color_char) {
+    public void setColor_char (Character par_color_char) {
         this.color_char = par_color_char;
     }
 

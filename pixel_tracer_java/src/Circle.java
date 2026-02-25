@@ -68,6 +68,35 @@ public class Circle extends Shape implements Fillable {
                 x++;
             }
         }
+            if (fillChar != ' ') {
+                int cx = this.getCenter().getPos_x();
+                int cy = this.getCenter().getPos_y();
+                int r = this.getRadius();
+
+                for (int i = cx - r; i <= cx + r; i++) {
+                    for (int j = cy - r; j <= cy + r; j++) {
+
+                        int dx = i - cx;
+                        int dy = j - cy;
+
+                        if (dx * dx + dy * dy <= r * r) {
+
+                            boolean isContour = false;
+
+                            for (Pixel p : pixels_list) {
+                                if (p.getX() == i && p.getY() == j) {
+                                    isContour = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isContour) {
+                                pixels_list.add(new Pixel(i, j, fillChar));
+                            }
+                        }
+                    }
+                }
+            }
         return pixels_list;
     }
 

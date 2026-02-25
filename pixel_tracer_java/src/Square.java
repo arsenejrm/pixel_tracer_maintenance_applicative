@@ -64,17 +64,15 @@ public class Square extends Shape implements Fillable {
         pixels.addAll(bottom.draw(drawn_char));
         pixels.addAll(left.draw(drawn_char));
 
-        // Si on veut un carré rempli (à finir d'implementer)
-        if (getFill()) {
-            for (int i = y + 1; i < y + lenght - 1; i++) {
-                Line fillLine = new Line(
-                        new Point(x + 1, i),
-                        new Point(x + lenght - 2, i)
-                );
-                pixels.addAll(fillLine.draw(drawn_char));
+        // Si on veut un carré rempli
+        if (fillChar != ' ') {
+            for (int i = 1; i < lenght - 1; i++) {
+                for (int j = 1; j < lenght - 1; j++) {
+                    pixels.add(new Pixel(x + i, y + j, fillChar));
+                }
             }
         }
-
+        
         return pixels;
     }
 
