@@ -52,6 +52,11 @@ public class Layer {
         return this.id;
     }
 
+    /**
+     * Récupérer une forme par son id
+     * @return the value of shape_by_id
+     * @param id
+     */
     public Shape getShapeById(String id) {
         for (Shape shape : this.list_shapes) {
             if (shape.getId().toString().equals(id)) {
@@ -122,6 +127,7 @@ public class Layer {
     //
 
     /**
+     * toString
      */
     @Override
     public String toString()
@@ -131,6 +137,7 @@ public class Layer {
 
 
     /**
+     * met la visibilité du layer sur visible ou non
      * @param        visible
      */
     public void set_visibility(Boolean visible)
@@ -139,6 +146,7 @@ public class Layer {
 
 
     /**
+     * ajoute une forme dans le layer
      * @param        shape
      */
     public void add_shape_to_layer(Shape shape)
@@ -148,6 +156,7 @@ public class Layer {
 
 
     /**
+     * supprime une forme du layer
      * @param        id
      */
     public void remove_shape_from_layer(UUID id)
@@ -184,6 +193,10 @@ public class Layer {
     */
 
     
+    /**
+     * dessine le layer
+     * @return        ArrayList<Pixel>
+     * */
     public ArrayList<Pixel> draw() {
 
         ArrayList<Pixel> pixels = new ArrayList<>();

@@ -16,6 +16,13 @@ public class Area {
     private ArrayList<ArrayList<Character>> pixel_map;
     
 
+    /**
+     * Constructor
+     * @param par_width
+     * @param par_height
+     * @param par_id
+     * @param par_name
+     */
     public Area (int par_width, int par_height, UUID par_id, String par_name) {
         this.list_layers = new ArrayList<>();
         this.current_layer = new Layer();
@@ -29,6 +36,9 @@ public class Area {
     };
 
 
+    /**
+     * Créer la map des pixels
+     * */
     private void create_pixel_map() {
         this.pixel_map = new ArrayList<>();
         for (int i = 0; i < height; i++) {
@@ -40,6 +50,9 @@ public class Area {
         }
     }
 
+    /**
+     * Mettre à jour la map des pixels
+     * */
     public void update_pixel_map() {
         create_pixel_map();
         for (Layer layer : list_layers) {
@@ -185,15 +198,17 @@ public class Area {
     //
 
     /**
+     * toString
      */
     @Override
     public String toString()
     {
-        return this.id + " " + this.name;
+        return "AREA " + this.id + " " + this.name + " " + this.width + " " + this.height;
     }
 
 
     /**
+     * ajoute un nouveau layer
      * @param        layer
      */
     public void add_layer(Layer par_layer){
@@ -202,6 +217,7 @@ public class Area {
 
 
     /**
+     * supprime un layer
      * @param        layer_id
      */
     public void remove_layer(UUID layer_id)
@@ -214,9 +230,4 @@ public class Area {
     }
 
 
-    /**
-     */
-    public void draw_area(){
-        
-    }
 }

@@ -20,11 +20,21 @@ public class Polygon extends Shape implements Fillable {
         super(0);
      };
     
+    /**
+     * Constructor
+     * @param points
+     */
     public Polygon(ArrayList<Point> points) {
         super(0);
         this.points = points;
     }
 
+    /**
+     * Constructor
+     * @param id
+     * @param n
+     * @param points
+     */
     public Polygon(int id, int n, ArrayList<Point> points) {
         super(id);
         this.points = points;
@@ -33,6 +43,12 @@ public class Polygon extends Shape implements Fillable {
     //
     // Methods
     //
+
+    /**
+     * Dessine un Polygon
+     * @param drawn_char
+     * @return
+     */
     @Override
     public ArrayList<Pixel> draw(char drawn_char) {
         ArrayList<Pixel> pixels_list = new ArrayList<>();
@@ -96,6 +112,12 @@ public class Polygon extends Shape implements Fillable {
         return pixels_list;
     }
 
+    /**
+     * Déplace le Polygon selon les paramètres delta des abscisses et des ordonnées, qu'ils soient positifs ou négatifs
+     * @param deltaX
+     * @param deltaY
+     * 
+     */
     @Override
     public void translate(int deltaX, int deltaY) {
         for (Point p : points) {
@@ -103,11 +125,19 @@ public class Polygon extends Shape implements Fillable {
         }
     }
 
+    /**
+     * Modifie le caractère de remplissage du Polygon
+     * @param c
+     */
     @Override
     public void setFillChar(char c) {
         this.fillChar = c;
     }
 
+    /**
+     * Retourne le caractère de remplissage du Polygon
+     * @return
+     */
     @Override
     public char getFillChar() {
         return fillChar;
@@ -136,6 +166,10 @@ public class Polygon extends Shape implements Fillable {
     }
 
 
+    /**
+     * Renvoie les coordonnées du Polygon pour la commande list
+     * @return
+     */
     public String points_toString() {
         String str_out = "";
         for (Point point : this.getPoints()) {
@@ -146,6 +180,7 @@ public class Polygon extends Shape implements Fillable {
 
 
     /**
+     * Renvoie la classe du Polygon et ses coordonnées pour la commande list
      */
     @Override
     public String toString()

@@ -42,20 +42,8 @@ public class PixelTracer {
         return current_area;
     }
 
-
     /**
-     */
-    @Override
-    public String toString()
-    {
-        return "PixelTracer{" +
-                "list_areas=" + list_areas +
-                ", current_area=" + current_area +
-                '}';
-    }
-
-
-    /**
+     * Ajoute un nouvel area
      * @param        area
      */
     public void add_area(Area area)
@@ -65,6 +53,7 @@ public class PixelTracer {
 
 
     /**
+     * Supprime un area
      * @param        id_area
      */
     public void remove_area(UUID id_area)
@@ -77,6 +66,14 @@ public class PixelTracer {
     }
 
 
+
+    /** 
+     * Interpréte une commande dans la console
+     * List des commandes:
+     * - help
+     * @return       String
+     * @param        user_input
+    */
     public String command_interpreter(String user_input) {
         String error_unknown = "commande inconnue\n";
         String error_empty = "commande manquante\n";
