@@ -78,6 +78,7 @@ public class PixelTracer {
         String error_unknown = "commande inconnue\n";
         String error_empty = "commande manquante\n";
         String error_used = "L'objet référencé est en cours d'utilisation\n";
+        String error_not_found = "L'objet référencé n'est pas trouvable";
         String error_param = "erreur paramètres, consulter la commande help\n";
         String action_completed = "done\n";
 
@@ -114,7 +115,7 @@ public class PixelTracer {
                     \tsquare x1 y1 l : draw square (x1, y1)  length\r
                     \trectangle x1 y1 w h : draw square (x1, y1)  width height\r
                     \tcircle x y r : center at (x, y) radius r\r
-                    \tpolygon x1 y1 x2 y2 ... : draw polygon\r
+                    \tpolygon x1 y1 x2 y2 x3 y3 ... : draw polygon\r
                     \tcurve x1 y1 x2 y2 x3 y3 ... : draw Bezier curve\r
                     \t==== Draw manager ====\r
                     \tlist {layers, areas, shapes}\r
@@ -164,9 +165,7 @@ public class PixelTracer {
             }
 
             case "point" -> {
-                if (command_params.isEmpty() || command_params.size() == 1) {
-                    return error_param;
-                } else if (command_params.size() == 2) {
+                if (command_params.size() == 2) {
                     try {
                         int px = Integer.parseInt(command_params.get(0));
                         int py = Integer.parseInt(command_params.get(1));
@@ -187,7 +186,7 @@ public class PixelTracer {
                         int y2 = Integer.parseInt(command_params.get(3));
                         this.current_area.getCurrent_layer().add_shape_to_layer(new Line(new Point(x1, y1), new Point(x2, y2)));
                         return command_interpreter("plot");
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {return error_param;}
                 } else {
                     return error_param;
                 }
@@ -201,7 +200,7 @@ public class PixelTracer {
                         int l = Integer.parseInt(command_params.get(2));
                         this.current_area.getCurrent_layer().add_shape_to_layer(new Square(l, new Point(x1, y1)));
                         return command_interpreter("plot");
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {return error_param;}
                 } else {
                     return error_param;
                 }
@@ -216,7 +215,7 @@ public class PixelTracer {
                         int h = Integer.parseInt(command_params.get(3));
                         this.current_area.getCurrent_layer().add_shape_to_layer(new Rectangle(h, w, new Point(x1, y1)));
                         return command_interpreter("plot");
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {return error_param;}
                 } else {
                     return error_param;
                 }
@@ -230,14 +229,14 @@ public class PixelTracer {
                         int r = Integer.parseInt(command_params.get(2));
                         this.current_area.getCurrent_layer().add_shape_to_layer(new Circle(r, new Point(x, y)));
                         return command_interpreter("plot");
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {return error_param;}
                 } else {
                     return error_param;
                 }
             }
 
             case "polygon" -> {
-                if (command_params.size() > 1 && command_params.size() % 2 == 0) {
+                if (command_params.size() >= 6 && command_params.size() % 2 == 0) {
                     ArrayList<Point> points = new ArrayList<>();
                     int params_couples_counter = 0;
                     try {
@@ -249,83 +248,86 @@ public class PixelTracer {
                         }
                         this.current_area.getCurrent_layer().add_shape_to_layer(new Polygon(points));
                         return command_interpreter("plot");
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {return error_param;}
                 } else {
                     return error_param;
                 }
             }
 
             case "curve" -> {
-
                 // minimum 3 points (6 valeurs)
-                if (command_params.size() < 6 || command_params.size() % 2 != 0) {
-                    return error_param;
-                }
+                if (command_params.size() >= 6 && command_params.size() % 2 == 0) {
+                    try {
+                        ArrayList<Point> points = new ArrayList<>();
 
-                try {
-                    ArrayList<Point> points = new ArrayList<>();
+                        for (int i = 0; i < command_params.size(); i += 2) {
+                            int x = Integer.parseInt(command_params.get(i));
+                            int y = Integer.parseInt(command_params.get(i + 1));
+                            points.add(new Point(x, y));
+                        }
 
-                    for (int i = 0; i < command_params.size(); i += 2) {
-                        int x = Integer.parseInt(command_params.get(i));
-                        int y = Integer.parseInt(command_params.get(i + 1));
-                        points.add(new Point(x, y));
+                        this.current_area
+                            .getCurrent_layer()
+                            .add_shape_to_layer(new Curve(points));
+
+                        return command_interpreter("plot");
+
+                    } catch (NumberFormatException e) {
+                        return error_param;
                     }
-
-                    this.current_area
-                        .getCurrent_layer()
-                        .add_shape_to_layer(new Curve(points));
-
-                    return command_interpreter("plot");
-
-                } catch (NumberFormatException e) {
+                } else {
                     return error_param;
                 }
             }
 
             case "list" -> {
                 String info_list = "";
-                if (command_params.isEmpty()) {
-                    return error_param;
-                } else if (command_params.get(0).equals("areas")) {
-                    for (Area area : this.list_areas) {
-                        if (area == this.current_area) {
-                            info_list += " *   ";
-                        } else {
-                            info_list += " -   ";
+                if (command_params.size() == 1) {
+                    if (command_params.get(0).equals("areas")) {
+                        for (Area area : this.list_areas) {
+                            if (area == this.current_area) {
+                                info_list += " *   ";
+                            } else {
+                                info_list += " -   ";
+                            }
+                            info_list += area.toString() + "\n";
                         }
-                        info_list += area.toString() + "\n";
-                    }
-                } else if (command_params.get(0).equals("layers")) {
-                    for (Layer layer : this.current_area.getList_layers()) {
-                        if (layer == this.current_area.getCurrent_layer()) {
-                            info_list += " *   ";
-                        } else {
-                            info_list += " -   ";
+                    } else if (command_params.get(0).equals("layers")) {
+                        for (Layer layer : this.current_area.getList_layers()) {
+                            if (layer == this.current_area.getCurrent_layer()) {
+                                info_list += " *   ";
+                            } else {
+                                info_list += " -   ";
+                            }
+                            info_list += layer.toString() + "\n";
                         }
-                        info_list += layer.toString() + "\n";
+                    } else if (command_params.get(0).equals("shapes")) {
+                        for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
+                            info_list += " -   " + shape.toString() + "\n";
+                        }
+                    } else {
+                        return error_param;
                     }
-                } else if (command_params.get(0).equals("shapes")) {
-                    for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
-                        info_list += " -   " + shape.toString() + "\n";
-                    }
+                    info_list += action_completed;
+                    return info_list;
                 } else {
                     return error_param;
                 }
-                info_list += action_completed;
-                return info_list;
             }
 
             case "new" -> {
-                if (command_params.isEmpty()) {
+                if (command_params.size() == 1) {
+                    if (command_params.get(0).equals("area")) {
+                        this.current_area = new Area(this.width, this.height, UUID.randomUUID(), "area_name");
+                        this.list_areas.add(this.current_area);
+                    } else if (command_params.get(0).equals("layer")) {
+                        this.current_area.setCurrent_layer(new Layer());
+                        this.current_area.add_layer(this.current_area.getCurrent_layer());
+                    }
+                    return action_completed;
+                } else {
                     return error_param;
-                } else if (command_params.get(0).equals("area")) {
-                    this.current_area = new Area(this.width, this.height, UUID.randomUUID(), "area_name");
-                    this.list_areas.add(this.current_area);
-                } else if (command_params.get(0).equals("layer")) {
-                    this.current_area.setCurrent_layer(new Layer());
-                    this.current_area.add_layer(this.current_area.getCurrent_layer());
                 }
-                return action_completed;
             }
 
             case "select" -> {
@@ -335,17 +337,23 @@ public class PixelTracer {
                             System.out.println(area.getId().toString());
                             if (command_params.get(1).equals(area.getId().toString())) {
                                 setCurrent_area(area);
+                                return action_completed;
                             }
                         }
+                        return error_not_found;
                     } else if (command_params.get(0).equals("layer")) {
                         for (Layer layer : this.current_area.getList_layers()) {
                             System.out.println(command_params.get(1) + " " + layer.getId().toString());
                             if (command_params.get(1).equals(layer.getId().toString())) {
                                 this.current_area.setCurrent_layer(layer);
+                                return action_completed;
                             }
                         }
+                        return error_not_found;
                     }
                     return action_completed;
+                } else {
+                    return error_param;
                 }
             }
 
@@ -361,6 +369,7 @@ public class PixelTracer {
                                 return action_completed;
                             }
                         }
+                        return error_not_found;
                     } else if (command_params.get(0).equals("layer")) {
                         if (this.current_area.getCurrent_layer().getId().toString().equals(command_params.get(1))) {
                             return error_used;
@@ -371,6 +380,7 @@ public class PixelTracer {
                                 return action_completed;
                             }
                         }
+                        return error_not_found;
                     } else if (command_params.get(0).equals("shape")) {
                         for (Shape shape : this.current_area.getCurrent_layer().getList_shapes()) {
                             if (shape.getId().toString().equals(command_params.get(1))) {
@@ -378,7 +388,10 @@ public class PixelTracer {
                                 return action_completed;
                             }
                         }
+                        return error_not_found;
                     }
+                } else {
+                    return error_param;
                 }
             }
 
@@ -408,7 +421,10 @@ public class PixelTracer {
                                 }
                             }
                         }
+                        return error_not_found;
                     }
+                } else {
+                    return error_param;
                 }
             }
 
