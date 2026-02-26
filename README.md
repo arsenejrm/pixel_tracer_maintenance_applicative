@@ -13,11 +13,11 @@ Le projet est organisé en plusieurs dossiers et branches afin de séparer clair
 
 ## Structure des dossiers 
 
-pixel_tracer/
-│
-├── pixel_tracer_c/         -> Version originale en C
-├── pixel_tracer_java/      -> Version orientée objet en Java
-└── Doc/                    -> Rapport, documentation et ressources
+pixel_tracer/  
+│  
+├── pixel_tracer_c/         -> Version originale en C  
+├── pixel_tracer_java/      -> Version orientée objet en Java  
+└── Doc/                    -> Rapport, documentation et ressources  
 
 ## Organisation des branches
 
@@ -187,7 +187,8 @@ Description :
 Affiche toutes les catégories de commandes et leur syntaxe.
 À utiliser dès que besoin
 
---- 
+---
+
 ## plot
 
 Affiche le rendu de l’area courante dans le terminal.
@@ -210,6 +211,7 @@ Description :
 Renvoie l’instruction de nettoyage du terminal.
 
 ---
+
 ## exit
 
 Quitte le programme.
@@ -352,7 +354,7 @@ Description :
 ## new
 
 Crée un nouvel élément.
-Utilisation :
+Utilisation :  
 ~> new area  
 ~> new layer  
 
@@ -365,14 +367,14 @@ Description :
 ## select
 
 Sélectionne une area ou un layer via son identifiant (UUID).
-Utilisation :
+Utilisation :  
 ~> select area UUID  
 ~> select layer UUID  
 
 Exemple :
 ~> select area 123e4567-e89b-12d3-a456-426614174000
 
-Description :
+Description :  
 Change l’élément actif.
 
 Utiliser list areas ou list layers pour récupérer les identifiants.
@@ -382,12 +384,12 @@ Utiliser list areas ou list layers pour récupérer les identifiants.
 ## delete
 
 Supprime un élément.
-Utilisation :
+Utilisation :  
 ~> delete area UUID  
 ~> delete layer UUID  
 ~> delete shape UUID  
 
-Description :
+Description :  
 Supprime l’élément correspondant.
 
 Restrictions :
@@ -403,7 +405,7 @@ Restrictions :
 ## set char
 
 Modifie les caractères d’affichage.
-Utilisation :
+Utilisation :  
 ~> set char border X  
 ~> set char background .  
 
@@ -412,7 +414,7 @@ Description :
 - border  -> Modifie le caractère de bordure des formes du layer courant
 - background  -> Modifie le caractère vide de l’area
 
-Exemple :
+Exemple :  
 set char border #  
 set char background .  
 
@@ -420,11 +422,11 @@ set char background .
 ## set layer
 
 Modifie la visibilité d’un layer.
-Utilisation :
+Utilisation :  
 ~> set layer visible UUID  
 ~> set layer unvisible UUID  
 
-Description :
+Description :  
 - visible  -> Rend le layer visible
 - unvisible  -> Masque le layer
 
@@ -437,10 +439,10 @@ Description :
 ## translate
 
 Déplace une forme.
-Utilisation :
+Utilisation :  
 ~> translate UUID dx dy
 
-Exemple :
+Exemple :  
 ~> translate 123e4567-e89b-12d3-a456-426614174000 5 -2
 
 Description :
@@ -453,16 +455,16 @@ Déplace la forme :
 ## fill
 
 Remplit une forme avec un caractère.
-Utilisation :
+Utilisation :  
 ~> fill UUID c
 
-Exemple :
+Exemple :  
 ~> fill 123e4567-e89b-12d3-a456-426614174000 *
 
-Description :
+Description :  
 Remplit l’intérieur d’une forme avec le caractère spécifié.
 
-Limitations :
+Limitations :  
 - Non supporté pour line
 - Non supporté pour point
 - Non supporté pour curve
